@@ -14,6 +14,8 @@ import { RegisterComponent } from './components/register/register.component'
 import { ProfileComponent } from './components/profile/profile.component';
 
 import { ValidateService } from '../app/services/validate.service';
+import { AuthService } from './services/auth.service';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 
 const appRoutes: Routes = [
@@ -35,7 +37,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    //FlashMessagesModule
+    FlashMessagesModule.forRoot()
   ],
   
   declarations: [
@@ -48,7 +50,7 @@ const appRoutes: Routes = [
 
   ],
  
-  providers: [ValidateService],
+  providers: [ValidateService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
