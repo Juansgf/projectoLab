@@ -1,4 +1,4 @@
 module.exports = {
-    database: 'mongodb://localhost:27017/proyectoLab',
+    database: 'mongodb+srv://dbAdmin:juan@cluster0.riebv.mongodb.net/proyetcoLab?retryWrites=true&w=majority',
     secret: 'yoursecret'
   }
