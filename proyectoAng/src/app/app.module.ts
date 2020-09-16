@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // components
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -12,6 +13,15 @@ import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component'
 import { ProfileComponent } from './components/profile/profile.component';
+import { PostCreateComponent } from './components/posts/post-create/post-create.component';
+import { PostListComponent } from './components/posts/post-list/post-list.component';
+
+import { MatInputModule } from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 import { ValidateService } from '../app/services/validate.service';
 import { AuthService } from './services/auth.service';
@@ -26,7 +36,8 @@ const appRoutes: Routes = [
 {path:'dashboard', component:DashboardComponent},
 {path:'profile', component:ProfileComponent},
 {path:'home', component:HomeComponent},
-  
+{path:'post', component:PostCreateComponent},
+{path:'post-list', component:PostListComponent}
 ];
 
 @NgModule({
@@ -37,9 +48,15 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatCardModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatExpansionModule
   ],
-  
+
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -49,7 +66,7 @@ const appRoutes: Routes = [
     RegisterComponent,
 
   ],
- 
+
   providers: [ValidateService, AuthService],
   bootstrap: [AppComponent]
 })
