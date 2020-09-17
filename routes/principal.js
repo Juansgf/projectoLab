@@ -5,72 +5,17 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const Post = require('../models/post');
 const PostController = require('../controllers/postController');
+const UserController = require('../controllers/userController'); 
 const config = require('../config/db')
 
 // Register
-router.post('/register', (req, res, next) => {
-  let newUser = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password
-  });
-
-  User.addUser(newUser, (err, user) => {
-    if(err){
-      res.json({success: false, msg:'Failed to register user'});
-    } else {
-      res.json({success: true, msg:'User registered'});
-    }
-  });
-});
+router.post('/register', UserController.register);
 
 //Post
-/*router.post('/newPost', (req, res, next) => {
-  var myData = new Post(req.body);
-  myData.save().then(item => {
-      res.send("item saved to database");
-  })
-  .catch(err => {
-    res.status(400).send("unable to save to database");
-  });
-});*/
-
 router.post('/newPost', PostController.registerPost);
 
-
 // Authenticate
-router.post('/authenticate', (req, res, next) => {
-    const email = req.body.email;
-    const password = req.body.password;
-  
-    User.getUserByUsername(email, (err, user) => {
-      if(err) throw err;
-      if(!user){
-        return res.json({success: false, msg: 'User not found'});
-      }
-  
-      User.comparePassword(password, user.password, (err, isMatch) => {
-        if(err) throw err;
-        if(isMatch){
-          const token = jwt.sign({data:user}, config.secret, {
-            expiresIn: 604800 // 1 week
-          });
-  
-          res.json({
-            success: true,
-            token: 'JWT '+token,
-            user: {
-              id: user._id,
-              name: user.name,
-              email: user.email
-            }
-          });
-        } else {
-          return res.json({success: false, msg: 'Wrong password'});
-        }
-      });
-    });
-  });
+router.post('/authenticate', UserController.auth);
 
 // Profile
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {

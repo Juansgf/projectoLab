@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
     email:String;
     password:String;
 
-  constructor(private validateService: ValidateService, 
+  constructor(private validateService: ValidateService,
     private flashMessage:FlashMessagesService,
     private authService: AuthService,
     private router:Router ) { }
@@ -55,6 +55,6 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-     
+
 
 }

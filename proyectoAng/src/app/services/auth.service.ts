@@ -41,7 +41,6 @@ export class AuthService {
   }
 
 
-
   logout(){
     this.authToken = null;
     this.user = null;
@@ -56,6 +55,12 @@ export class AuthService {
       observe: 'response'
     }).pipe(map((res: HttpResponse<JSON>) => res));
   }
+
+  storePostData(post) {
+    localStorage.setItem('post', JSON.stringify(post));
+    this.post = post;
+  }
+
 /*
   loadToken() {
     const token = localStorage.getItem('id_token');
