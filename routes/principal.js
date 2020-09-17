@@ -4,6 +4,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const Post = require('../models/post');
+const PostController = require('../controllers/postController');
 const config = require('../config/db')
 
 // Register
@@ -24,16 +25,17 @@ router.post('/register', (req, res, next) => {
 });
 
 //Post
-router.post('/newPost', (req, res, next) => {
+/*router.post('/newPost', (req, res, next) => {
   var myData = new Post(req.body);
- myData.save()
- .then(item => {
- res.send("item saved to database");
- })
- .catch(err => {
- res.status(400).send("unable to save to database");
- });
+  myData.save().then(item => {
+      res.send("item saved to database");
+  })
+  .catch(err => {
+    res.status(400).send("unable to save to database");
   });
+});*/
+
+router.post('/newPost', PostController.registerPost);
 
 
 // Authenticate
@@ -73,6 +75,6 @@ router.post('/authenticate', (req, res, next) => {
 // Profile
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     res.json({user: req.user});
-  });
+});
 
 module.exports = router;

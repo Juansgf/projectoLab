@@ -2,16 +2,12 @@ const mongoose = require('mongoose');
 
 const Post = mongoose.model('Post');
 
-module.exports.register = (req, res, next) => {
-    var post = new Post();
-    post.tit = req.body.tit;
-    post.cont = req.body.cont;
-    user.save((err, doc) => {
-        if (!err)
-            res.send(doc);
-        else {
-            return next(err);
-        }
-
+module.exports.registerPost = (req, res, next) => {
+    var post = new Post(req.body);
+    post.save().then(item => {
+        res.send("item saved to database");
+    })
+    .catch(err => {
+      res.status(400).send("unable to save to database");
     });
-}
+};
