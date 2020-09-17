@@ -13,8 +13,6 @@ import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component'
 import { ProfileComponent } from './components/profile/profile.component';
-import { PostCreateComponent } from './components/posts/post-create/post-create.component';
-import { PostListComponent } from './components/posts/post-list/post-list.component';
 
 import { MatInputModule } from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
@@ -36,8 +34,6 @@ const appRoutes: Routes = [
 {path:'dashboard', component:DashboardComponent},
 {path:'profile', component:ProfileComponent},
 {path:'home', component:HomeComponent},
-{path:'post', component:PostCreateComponent},
-{path:'post-list', component:PostListComponent}
 ];
 
 @NgModule({

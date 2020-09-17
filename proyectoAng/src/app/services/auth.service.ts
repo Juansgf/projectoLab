@@ -10,6 +10,7 @@ export class AuthService {
 
   authToken: any;
   user: any;
+  post:any;
 
   constructor(private http:HttpClient) { }
 
@@ -45,6 +46,15 @@ export class AuthService {
     this.authToken = null;
     this.user = null;
     localStorage.clear();
+  }
+
+  registerPost(post) {
+    let headers = new HttpHeaders();
+    headers.append('Contet-Type', 'application/json');
+    return this.http.post('http://localhost:3000/user/newPost', post, {
+      headers: headers,
+      observe: 'response'
+    }).pipe(map((res: HttpResponse<JSON>) => res));
   }
 /*
   loadToken() {
