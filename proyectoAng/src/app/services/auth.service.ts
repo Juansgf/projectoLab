@@ -41,7 +41,6 @@ export class AuthService {
   }
 
 
-
   logout(){
     this.authToken = null;
     this.user = null;
@@ -56,6 +55,16 @@ export class AuthService {
       observe: 'response'
     }).pipe(map((res: HttpResponse<JSON>) => res));
   }
+
+  storePostData(post) {
+    localStorage.setItem('post', JSON.stringify(post));
+    this.post = post;
+  }
+
+  getAllPost(){
+    return this.http.get('http://localhost:3000/user/allPosts', {});
+  }
+
 /*
   loadToken() {
     const token = localStorage.getItem('id_token');

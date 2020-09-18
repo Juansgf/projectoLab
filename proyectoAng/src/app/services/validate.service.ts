@@ -21,12 +21,12 @@ export class ValidateService {
   }
 
 
-validatePost(post){
-  if(post.name == undefined || post.email == undefined || post.password == undefined){
-    return false;
-  } else {
-    return true;
+  validatePost(post){
+    if(post.tit == undefined || post.cont == undefined){
+      return false;
+    } else {
+      return true;
+    }
   }
-}
 
 }

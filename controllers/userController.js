@@ -1,19 +1,51 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); 
+
+const jwt = require('jsonwebtoken');
+const config = require('../config/db')
 
 const User = mongoose.model('User');
 
-module.exports.register = (req, res, next) => {
-    var user = new User();
-    user.name = req.body.name;
-    user.email = req.body.email;
-    user.password = req.body.password;
-    user.save((err, doc) => {
-        if (!err)
-            res.send(doc);
-        else {
-            return next(err);
+module.exports.register = (req, res, next) => { 
+    var user = new User(req.body);
+    User.addUser(user, (err, user) => {
+        if(err){
+          res.json({success: false, msg:'Failed to register user'});
+        } else {
+          res.json({success: true, msg:'User registered'});
         }
+    }); 
+} 
 
+module.exports.auth = (req, res, next) => { 
+    const email = req.body.email;
+    const password = req.body.password;
+  
+    User.getUserByUsername(email, (err, user) => {
+      if(err) throw err;
+      if(!user){
+        return res.json({success: false, msg: 'User not found'});
+      }
+  
+      User.comparePassword(password, user.password, (err, isMatch) => {
+        if(err) throw err;
+        if(isMatch){
+          const token = jwt.sign({data:user}, config.secret, {
+            expiresIn: 604800 // 1 week
+            });
+  
+            res.json({
+                success: true,
+                token: 'JWT '+token,
+                user: {
+                    id: user._id,
+                    name: user.name,
+                    email: user.email
+                }
+            });
+        } else {
+          return res.json({success: false, msg: 'Wrong password'});
+        }
+      });
     });
 } 
 
