@@ -13,6 +13,20 @@ router.post('/register', UserController.register);
 
 //Post
 router.post('/newPost', PostController.registerPost);
+//router.get('/posts', PostController.showPosts);
+router.get('/posts/:id', function(req, res, next) {
+    var id = req.params.id
+    User.findById(id)        
+        .lean().exec(function (err, results) {
+        if (err) return console.error(err)
+        try {
+            console.log(results)            
+        } catch (error) {
+            console.log("errror getting results")
+            console.log(error)
+        } 
+    })
+})
 
 // Authenticate
 router.post('/authenticate', UserController.auth);
@@ -22,4 +36,6 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
     res.json({user: req.user});
 });
 
-module.exports = router;
+
+
+module.exports = router; 

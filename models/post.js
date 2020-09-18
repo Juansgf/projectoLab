@@ -11,8 +11,17 @@ var PostSchema = new mongoose.Schema({
 
 const Post = module.exports = mongoose.model('Post', PostSchema);
 
-module.exports.getPostById = function(id, callback){
+/*module.exports.getPostById = function(id){
   Post.findById(id, callback);
+}*/
+
+module.exports.findById = function(id, callback) {
+  console.log("find by: "+ id);
+  get_collection(function(collection) {
+    collection.findOne({"_id": new ObjectId(id)}, function(err, doc) {
+       callback(doc);
+    });
+  });
 }
   
 module.exports.getPostByTit = function(tit, callback){

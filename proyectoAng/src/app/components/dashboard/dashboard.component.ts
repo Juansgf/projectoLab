@@ -35,13 +35,13 @@ export class DashboardComponent implements OnInit {
 
     //Registrar Post
     this.authService.registerPost(post).subscribe(data =>{
-      console.log("Entre a la funcion")
+      //console.log("Entre a la funcion", data.body)
       if (data.body['success']){
-        console.log("Entre")
+        //console.log("Entre")
         this.flashMessage.show('Post registrado!', {cssClass: 'alert-success', timeout: 3000});
         this.router.navigate(['/login'])
       }else{
-        console.log("el otro")
+        //console.log("el otro")
         this.flashMessage.show('Algo salio mal :(', {cssClass: 'alert-danger', timeout: 3000});
         this.router.navigate(['/login'])
       }
