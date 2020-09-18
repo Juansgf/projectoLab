@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
 
   title:String
   content:String
-  blogPost;
+  //blogPost;
 
   constructor( private validateService:ValidateService,
     private flashMessage:FlashMessagesService,
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
       if (data.body['success']){
         //console.log("Entre")
         this.flashMessage.show('Post registrado!', {cssClass: 'alert-success', timeout: 3000});
-        this.getAllPosts()
+        //this.getAllPosts()
         this.router.navigate(['/dashboard'])
       }else{
         //console.log("el otro")
@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  getAllPosts(){
+  /*getAllPosts(){
     this.authService.getAllPost().subscribe(data => {
       if (data['success']){
         //console.log("Entre")
@@ -64,10 +64,10 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['/dashboard'])
       }
     })
-  }
+  }*/
 
   ngOnInit(): void {
-    this.getAllPosts();
+    //this.getAllPosts();
   }
 
 }

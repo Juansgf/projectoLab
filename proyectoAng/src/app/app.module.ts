@@ -13,6 +13,7 @@ import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component'
 import { ProfileComponent } from './components/profile/profile.component';
+import { ShowPostComponent } from './components/show-posts/show-post.component';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
@@ -24,6 +25,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ValidateService } from '../app/services/validate.service';
 import { AuthService } from './services/auth.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { from } from 'rxjs';
 
 
 const appRoutes: Routes = [
@@ -60,7 +62,7 @@ const appRoutes: Routes = [
     HomeComponent,
     DashboardComponent,
     RegisterComponent,
-
+    ShowPostComponent
   ],
 
   providers: [ValidateService, AuthService],

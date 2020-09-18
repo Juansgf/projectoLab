@@ -14,7 +14,7 @@ router.post('/register', UserController.register);
 //Post
 router.post('/newPost', PostController.registerPost);
 //router.get('/posts', PostController.showPosts);
-router.get('/allPosts', (req, res, next) => {
+router.post('/allPosts', (req, res, next) => {
     Post.find({}, (err, posts) => {
         if(err){
             res.json({ success: false, message: err})
