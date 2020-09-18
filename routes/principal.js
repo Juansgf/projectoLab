@@ -12,6 +12,7 @@ const config = require('../config/db')
 router.post('/register', UserController.register);
 
 //Post
+
 router.post('/newPost', PostController.registerPost);
 //router.get('/posts', PostController.showPosts);
 router.get('/allPosts', (req, res, next) => {
