@@ -57,8 +57,8 @@ export class DashboardComponent implements OnInit {
   }
 
   disableFormNewPostForm() {
-    this.form.get('title').disable(); 
-    this.form.get('content').disable(); 
+    this.form.get('title').disable();
+    this.form.get('content').disable();
   }
 
   draftComment() {
@@ -66,7 +66,6 @@ export class DashboardComponent implements OnInit {
   }
 
   addPost() {
-    console.log("Si entre al add post");
     this.newPost = true;
     this.processing = true;
 
@@ -74,9 +73,6 @@ export class DashboardComponent implements OnInit {
       tit: this.form.get('title').value,
       cont: this.form.get('content').value
     }
-
-    console.log(post.tit);
-    console.log(post.cont);
 
     //  Validar post
     if(!this.validateService.validatePost(post)){
@@ -89,12 +85,10 @@ export class DashboardComponent implements OnInit {
     this.authService.registerPost(post).subscribe(data =>{
       //console.log("Entre a la funcion", data.body)
       if (data.body['success']){
-        console.log("succes");
         this.flashMessage.show('Post registrado!', {cssClass: 'alert-success', timeout: 3000});
         this.router.navigate(['/dashboard'])
         this.disableFormNewPostForm();
-      }else{ 
-        console.log("no success");
+      }else{
         this.flashMessage.show('Algo salio mal :(', {cssClass: 'alert-danger', timeout: 3000});
         this.processing = false;
         this.enableFormNewPostForm();
@@ -109,14 +103,14 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.getAllPosts();
+
   }
 
 
    goBack() {
     window.location.reload(); // Clear all variable states
   }
-  
+
 
 }
 
