@@ -4,11 +4,11 @@ import {Router} from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css', '../home/bootstrap.component.min.css']
+  selector: 'app-navbar-home',
+  templateUrl: './navbarHome.component.html',
+  styleUrls: ['./navbarHome.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarHomeComponent implements OnInit {
 
   constructor(private auth:AuthService,
     private router:Router,

@@ -1,16 +1,16 @@
 <div *ngFor="let post of posts" class="card" style="width: 80%; margin-top:10px; margin-left: 10%; margin-right: 10%;">
       <div class="card-body">
         <div class="d-flex w-100 justify-content-between">
-          <h3 style="color:#0069d9;">Title: {{post.tit}}</h3>
-          <small>3 days ago</small>
+          <h3 style="color:#0069d9;">Título: {{post.tit}}</h3>
+          <small>Hace 3 días</small>
         </div>
-          <p class="card-text">Content: {{post.cont}}</p>
+          <p class="card-text">Contenido: {{post.cont}}</p>
 
           <div class="row">
             <div class="col">
 
-              <button class="btn btn-success" style="margin-right: 1rem;">Comment</button>
-            
+              <button class="btn btn-success" style="margin-right: 1rem;">Comentar</button>
+
               <button class="btn btn-primary" style="margin-right: 1rem;" name="like">
                 <span>
                   <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -18,7 +18,7 @@
                   </svg>
                 </span>
               </button>
-      
+
               <button class="btn btn-danger" name="report" style="margin-right: 1rem;">
                 <span>
                   <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-flag-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +28,7 @@
               </button>
 
             </div>
-            
+
             <div class="col-md-auto">
               <button class="btn btn-info" name="edit" >
                 <span>
@@ -38,7 +38,7 @@
                 </span>
               </button>
             </div>
-              
+
             <div cñass="col col-lg-2">
               <button class="btn btn-danger" name="delete" style="margin-right: 1rem;">
                 <span>
@@ -48,10 +48,10 @@
                 </span>
               </button>
             </div>
-              
+
           </div>
       </div>
-     
+
   </div>
 
 
