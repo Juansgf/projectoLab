@@ -13,7 +13,7 @@ module.exports.register = (req, res, next) => {
         } else {
           res.json({success: true, msg:'User registered'});
         }
-    });
+    }); 
 } 
 
 module.exports.auth = (req, res, next) => { 

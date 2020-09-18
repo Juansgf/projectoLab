@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
-//import {PostService} from '../../services/post.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {Router} from '@angular/router';
 import {ValidateService} from '../../services/validate.service'
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-//import { PostService } from '../../services/post.service';
-
 
 @Component({
   selector: 'app-dashboard',
@@ -74,12 +71,12 @@ export class DashboardComponent implements OnInit {
     this.processing = true;
 
     const post = {
-      title: this.form.get('title').value,
-      content: this.form.get('content').value
+      tit: this.form.get('title').value,
+      cont: this.form.get('content').value
     }
 
-    console.log(post.title);
-    console.log(post.content);
+    console.log(post.tit);
+    console.log(post.cont);
 
     //  Validar post
     if(!this.validateService.validatePost(post)){
@@ -90,12 +87,12 @@ export class DashboardComponent implements OnInit {
 
     //Registrar Post
     this.authService.registerPost(post).subscribe(data =>{
-      console.log("Entre a la funcion")
+      //console.log("Entre a la funcion", data.body)
       if (data.body['success']){
         console.log("succes");
         this.flashMessage.show('Post registrado!', {cssClass: 'alert-success', timeout: 3000});
         this.router.navigate(['/dashboard'])
-        this.enableFormNewPostForm();
+        this.disableFormNewPostForm();
       }else{ 
         console.log("no success");
         this.flashMessage.show('Algo salio mal :(', {cssClass: 'alert-danger', timeout: 3000});
@@ -108,13 +105,11 @@ export class DashboardComponent implements OnInit {
   }
 
   reloadPosts() {
-    this.loadingPosts = true;
-    setTimeout(() => {
-      this.loadingPosts = false;
-    }, 4000);
+    this.router.navigate(['/dashboard']);
   }
 
   ngOnInit(): void {
+    //this.getAllPosts();
   }
 
 

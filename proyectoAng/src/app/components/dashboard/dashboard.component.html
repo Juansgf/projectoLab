@@ -1,27 +1,46 @@
-<h2 class="page-header">Dashboard</h2>
-<button type="button" name="button" class="btn btn-warning" *ngIf="!newPost" (click)="newPostForm()">New Post</button> 
-<button [disabled]="loadingPosts" type="Button" name="button" class="btn btn-secondary" *ngIf="!newPost" (click)="reloadPosts()">Reload</button>
+<h1 style="margin-top: 3rem;">Dashboard</h1>
+<button type="button" name="button" class="btn btn-warning" *ngIf="!newPost" (click)="newPostForm()" style="margin: 5px;">New Post</button> 
+<button [disabled]="loadingPosts" type="Button" name="reload" class="btn btn-secondary" *ngIf="!newPost" (click)="reloadPosts()" style="margin: 5px;">Reload</button>
 <br>
 <br>
 
 <div *ngIf="newPost">
   <form [formGroup]="form" name="postForm" (submit)="addPost()" *ngIf="newPost">
+    <h2>New post</h2>
     <div class="form-group">
-      <label>Titulo</label>
+      <label>Title</label>
       <div >
         <input type="text"  name="title" class="form-control" formControlName="title">
       </div>
     </div>
     <div class="form-group">
-      <label>Contenido</label>
+      <label>Content</label>
       <div >
         <textarea type="text"  name="content" class="form-control" formControlName="content" ></textarea>
       </div>
     </div>
-    <button  type="button" class="btn btn-secondary" (click)="goBack()" >Go Back</button>
+    <button  type="button" class="btn btn-secondary" (click)="goBack()" style="margin-right: 1rem;">Go Back</button>
     <input  type="submit" class="btn btn-primary" value="Post">
   </form>
 
 </div>
-  
+<br>
+<br>
+
+
+<app-show-post></app-show-post>
+
 <!--[ngClass]="{'has-success': form.controls.title.valid, 'has-error': form.controls.title.dirty && form.controls.title.errors}"-->
+<!--<form (submit)="addPost()">
+  <div class="form-group">
+    <label>Titulo</label>
+    <input type="text" [(ngModel)]="title" name="title" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Contenido</label>
+    <input type="text" [(ngModel)]="content" name="content" class="form-control" >
+  </div>
+  <input type="submit" class="btn btn-primary" value="Submit">
+</form>-->
+
+

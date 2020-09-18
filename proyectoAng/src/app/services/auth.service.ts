@@ -58,23 +58,16 @@ export class AuthService {
     let headers = new HttpHeaders();
     headers.append('Contet-Type', 'application/json');
     console.log("todo bien aqui")
-    return this.http.post('http://localhost:3000/user/newPost', JSON.stringify(post), {
+    return this.http.post('http://localhost:3000/user/newPost', post, {
       headers: headers,
       observe: 'response'
     }).pipe(map((res: HttpResponse<JSON>) => res));
   }
 
-  /*
-  loggedIn() {
-    if (localStorage.id_token == undefined) {
-      // console.log('Goodbye');
-      return false
-    } else {
-      // console.log('Hello');
-      const helper = new JwtHelperService()
-      // console.log(!helper.isTokenExpired(localStorage.id_token));
-      return !helper.isTokenExpired(localStorage.id_token);
-    }
+  storePostData(post) {
+    localStorage.setItem('post', JSON.stringify(post));
+    this.post = post;
   }
-*/
+
+
 }
