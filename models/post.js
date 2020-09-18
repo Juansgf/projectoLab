@@ -10,13 +10,8 @@ var PostSchema = new mongoose.Schema({
 });
 
 
-const Post = module.exports = mongoose.model('post', PostSchema);
+const Post = module.exports = mongoose.model('Post', PostSchema);
 
-
-
-/*module.exports.getPostById = function(id){
-  Post.findById(id, callback);
-}*/
 
 module.exports.findById = function(id, callback) {
   console.log("find by: "+ id);

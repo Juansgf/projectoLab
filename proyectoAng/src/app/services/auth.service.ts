@@ -3,9 +3,7 @@ import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 //import { JwtHelperService } from '@auth0/angular-jwt';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
   authToken: any;
@@ -47,9 +45,19 @@ export class AuthService {
     localStorage.clear();
   }
 
+
+
+  loadToken() {
+    const token = localStorage.getItem('id_token');
+    this.authToken = token;
+  }
+
+  
   registerPost(post) {
+    console.log("Entre al register post");
     let headers = new HttpHeaders();
     headers.append('Contet-Type', 'application/json');
+    console.log("todo bien aqui")
     return this.http.post('http://localhost:3000/user/newPost', post, {
       headers: headers,
       observe: 'response'
@@ -61,26 +69,5 @@ export class AuthService {
     this.post = post;
   }
 
-  /*getAllPost(){
-    return this.http.get('http://localhost:3000/user/allPosts', {});
-  }*/
 
-/*
-  loadToken() {
-    const token = localStorage.getItem('id_token');
-    this.authToken = token;
-  }
-
-  loggedIn() {
-    if (localStorage.id_token == undefined) {
-      // console.log('Goodbye');
-      return false
-    } else {
-      // console.log('Hello');
-      const helper = new JwtHelperService()
-      // console.log(!helper.isTokenExpired(localStorage.id_token));
-      return !helper.isTokenExpired(localStorage.id_token);
-    }
-  }
-*/
 }
