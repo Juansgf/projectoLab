@@ -11,6 +11,7 @@ module.exports.registerPost = (req, res, next) => {
     .catch(err => {
       res.json({success: false, msg:'Ocurrio un problema con el post'});
     });
+
 };
 
 module.exports.showPosts = (req, res) => {
@@ -23,3 +24,4 @@ module.exports.showPosts = (req, res) => {
     res.send('Post encontrado');
   });
 }
+
