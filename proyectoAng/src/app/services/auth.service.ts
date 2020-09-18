@@ -61,6 +61,10 @@ export class AuthService {
     this.post = post;
   }
 
+  getAllPost(){
+    return this.http.get('http://localhost:3000/user/allPosts', {});
+  }
+
 /*
   loadToken() {
     const token = localStorage.getItem('id_token');

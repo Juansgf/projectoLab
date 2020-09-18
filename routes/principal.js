@@ -14,18 +14,18 @@ router.post('/register', UserController.register);
 //Post
 router.post('/newPost', PostController.registerPost);
 //router.get('/posts', PostController.showPosts);
-router.get('/posts/:id', function(req, res, next) {
-    var id = req.params.id
-    User.findById(id)        
-        .lean().exec(function (err, results) {
-        if (err) return console.error(err)
-        try {
-            console.log(results)            
-        } catch (error) {
-            console.log("errror getting results")
-            console.log(error)
-        } 
-    })
+router.get('/allPosts', (req, res, next) => {
+    Post.find({}, (err, posts) => {
+        if(err){
+            res.json({ success: false, message: err})
+        } else{
+            if(!posts){
+                res.json({ success: false, message: "No hay posts"})
+            } else {
+                res.json({ success: true, post: posts})
+            }
+        }
+    }).sort({'_id': -1})
 })
 
 // Authenticate
