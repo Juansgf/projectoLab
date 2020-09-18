@@ -13,16 +13,20 @@ router.post('/register', (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password
+    
   });
 
   User.addUser(newUser, (err, user) => {
     if(err){
-      res.json({success: false, msg:'Failed to register user'});
+      res.json({success: false, msg:err});
     } else {
       res.json({success: true, msg:'User registered'});
     }
   });
 });
+
+//Match Post with user
+
 
 //Post
 /*router.post('/newPost', (req, res, next) => {
@@ -35,7 +39,19 @@ router.post('/register', (req, res, next) => {
   });
 });*/
 
-router.post('/newPost', PostController.registerPost);
+//router.post('/newPost', PostController.registerPost);
+
+router.get('/getPosts', function(req, res){
+  console.log('Muestra todos posts');
+  Post.find({})
+  .exec(function(err, posts){
+      if (err){
+          console.log("Error");
+      }else {
+          res.json(posts);
+      }
+  });
+});
 
 
 // Authenticate

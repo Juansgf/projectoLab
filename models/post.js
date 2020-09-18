@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const config = require('../config/db');
+const User = require('../models/user');
 
 // User Schema
 var PostSchema = new mongoose.Schema({
@@ -9,7 +10,9 @@ var PostSchema = new mongoose.Schema({
 });
 
 
-const Post = module.exports = mongoose.model('Post', PostSchema);
+const Post = module.exports = mongoose.model('post', PostSchema);
+
+
 
 module.exports.getPostById = function(id, callback){
   Post.findById(id, callback);
