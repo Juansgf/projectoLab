@@ -3,9 +3,7 @@ import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 //import { JwtHelperService } from '@auth0/angular-jwt';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
 
   authToken: any;
@@ -47,26 +45,26 @@ export class AuthService {
     localStorage.clear();
   }
 
-  registerPost(post) {
-    let headers = new HttpHeaders();
-    headers.append('Contet-Type', 'application/json');
-    return this.http.post('http://localhost:3000/user/newPost', post, {
-      headers: headers,
-      observe: 'response'
-    }).pipe(map((res: HttpResponse<JSON>) => res));
-  }
 
-  storePostData(post) {
-    localStorage.setItem('post', JSON.stringify(post));
-    this.post = post;
-  }
 
-/*
   loadToken() {
     const token = localStorage.getItem('id_token');
     this.authToken = token;
   }
 
+  
+  registerPost(post) {
+    console.log("Entre al register post");
+    let headers = new HttpHeaders();
+    headers.append('Contet-Type', 'application/json');
+    console.log("todo bien aqui")
+    return this.http.post('http://localhost:3000/user/newPost', JSON.stringify(post), {
+      headers: headers,
+      observe: 'response'
+    }).pipe(map((res: HttpResponse<JSON>) => res));
+  }
+
+  /*
   loggedIn() {
     if (localStorage.id_token == undefined) {
       // console.log('Goodbye');

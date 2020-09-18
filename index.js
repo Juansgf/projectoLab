@@ -5,7 +5,6 @@ const passport = require('passport');
 const path = require('path')
 const mongoose = require('mongoose');
 const config = require('./config/db');
-
 const rtsIndex = require('./routes/principal');
 
 // Connect To Database
@@ -36,7 +35,9 @@ app.use('/user', rtsIndex);
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 require('./config/passport')(passport);
+//app.use('/posts', rtsIndex);
 
 // Port Number
 const port = 3000;

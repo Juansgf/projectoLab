@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
+//import {PostService} from '../../services/post.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {Router} from '@angular/router';
 import {ValidateService} from '../../services/validate.service'
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+//import { PostService } from '../../services/post.service';
 
 
 @Component({
@@ -12,19 +15,71 @@ import {ValidateService} from '../../services/validate.service'
 })
 export class DashboardComponent implements OnInit {
 
+  messageClass;
+  message;
   title:String
   content:String
+  newPost = false;
+  loadingPosts=false;
+  form;
+  processing = true;
+  username;
 
   constructor( private validateService:ValidateService,
     private flashMessage:FlashMessagesService,
     private authService: AuthService,
-    private router:Router ) { }
+    //private postService: PostService,
+    private formBuilder: FormBuilder,
+    private router:Router ) {
+      this.createNewPostForm();
+     }
+
+  createNewPostForm(){
+    this.form = this.formBuilder.group({
+      title: ['', Validators.compose([
+        Validators.required,
+        Validators.maxLength(50),
+        Validators.minLength(5),
+      ])],
+      content: ['', Validators.compose([
+        Validators.required,
+        Validators.maxLength(500),
+        Validators.minLength(5)
+      ])]
+    })
+  }
+
+  newPostForm() {
+    this.newPost = true; // Show new blog form
+  }
+
+   // Enable new blog form
+   enableFormNewPostForm() {
+    this.form.get('title').enable(); // Enable title field
+    this.form.get('content').enable(); // Enable body field
+  }
+
+  disableFormNewPostForm() {
+    this.form.get('title').disable(); 
+    this.form.get('content').disable(); 
+  }
+
+  draftComment() {
+
+  }
 
   addPost() {
+    console.log("Si entre al add post");
+    this.newPost = true;
+    this.processing = true;
+
     const post = {
-      tit: this.title,
-      cont: this.content,
+      title: this.form.get('title').value,
+      content: this.form.get('content').value
     }
+
+    console.log(post.title);
+    console.log(post.content);
 
     //  Validar post
     if(!this.validateService.validatePost(post)){
@@ -37,19 +92,37 @@ export class DashboardComponent implements OnInit {
     this.authService.registerPost(post).subscribe(data =>{
       console.log("Entre a la funcion")
       if (data.body['success']){
-        console.log("Entre")
+        console.log("succes");
         this.flashMessage.show('Post registrado!', {cssClass: 'alert-success', timeout: 3000});
-        this.router.navigate(['/login'])
-      }else{
-        console.log("el otro")
+        this.router.navigate(['/dashboard'])
+        this.enableFormNewPostForm();
+      }else{ 
+        console.log("no success");
         this.flashMessage.show('Algo salio mal :(', {cssClass: 'alert-danger', timeout: 3000});
-        this.router.navigate(['/login'])
+        this.processing = false;
+        this.enableFormNewPostForm();
+        this.router.navigate(['/dashboard'])
       }
     })
 
   }
 
+  reloadPosts() {
+    this.loadingPosts = true;
+    setTimeout(() => {
+      this.loadingPosts = false;
+    }, 4000);
+  }
+
   ngOnInit(): void {
   }
 
+
+   goBack() {
+    window.location.reload(); // Clear all variable states
+  }
+  
+
 }
+
+// Disable new blog form

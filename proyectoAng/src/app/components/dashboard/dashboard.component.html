@@ -1,12 +1,27 @@
 <h2 class="page-header">Dashboard</h2>
-<form (submit)="addPost()">
-  <div class="form-group">
-    <label>Titulo</label>
-    <input type="text" [(ngModel)]="title" name="title" class="form-control">
-  </div>
-  <div class="form-group">
-    <label>Contenido</label>
-    <input type="text" [(ngModel)]="content" name="content" class="form-control" >
-  </div>
-  <input type="submit" class="btn btn-primary" value="Submit">
-</form>
+<button type="button" name="button" class="btn btn-warning" *ngIf="!newPost" (click)="newPostForm()">New Post</button> 
+<button [disabled]="loadingPosts" type="Button" name="button" class="btn btn-secondary" *ngIf="!newPost" (click)="reloadPosts()">Reload</button>
+<br>
+<br>
+
+<div *ngIf="newPost">
+  <form [formGroup]="form" name="postForm" (submit)="addPost()" *ngIf="newPost">
+    <div class="form-group">
+      <label>Titulo</label>
+      <div >
+        <input type="text"  name="title" class="form-control" formControlName="title">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Contenido</label>
+      <div >
+        <textarea type="text"  name="content" class="form-control" formControlName="content" ></textarea>
+      </div>
+    </div>
+    <button  type="button" class="btn btn-secondary" (click)="goBack()" >Go Back</button>
+    <input  type="submit" class="btn btn-primary" value="Post">
+  </form>
+
+</div>
+  
+<!--[ngClass]="{'has-success': form.controls.title.valid, 'has-error': form.controls.title.dirty && form.controls.title.errors}"-->
