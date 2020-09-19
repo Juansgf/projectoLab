@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
     private authService: AuthService,
     private router:Router, public http: HttpClient ) { }
 
-  addPost() {
+  newPost() {
     const post = {
       tit: this.title,
       cont: this.content,

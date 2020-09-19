@@ -1,6 +1,8 @@
 <ul>
-  <li><a routerLinkActive="active-link" routerLink="/home">INICIO</a></li>
-  <li><a class="active" routerLinkActive="active-link" routerLink="/dashboard">DASHBOARD</a></li>
-  <li><a class="log-out" (click)="onLogoutClick()">LOG OUT</a></li>
+  <li><a  routerLinkActive="active-link" routerLink="/home">INICIO</a></li>
+  <li><a *ngIf="auth.loggedIn()" class="active" routerLinkActive="active-link" routerLink="/dashboard">DASHBOARD</a></li>
+  <li><a  *ngIf="!auth.loggedIn()"routerLinkActive="active-link" routerLink="/login">LOGIN</a></li>
+  <li ><a  *ngIf="!auth.loggedIn()"routerLinkActive="active-link" routerLink="/register">REGISTRARSE</a></li>
+  <li><a  *ngIf="auth.loggedIn()"class="log-out" (click)="onLogoutClick()">LOG OUT</a></li>
 </ul>
 

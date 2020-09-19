@@ -26,7 +26,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ValidateService } from '../app/services/validate.service';
 import { AuthService } from './services/auth.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
-import { from } from 'rxjs';
+import { AuthGuard } from './guards/auth.guard'
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+
 
 
 const appRoutes: Routes = [
@@ -34,8 +36,8 @@ const appRoutes: Routes = [
 {path:'', component:HomeComponent},
 {path:'register', component:RegisterComponent},
 {path:'login', component:LoginComponent},
-{path:'dashboard', component:DashboardComponent},
-{path:'profile', component:ProfileComponent},
+{path:'dashboard', component:DashboardComponent, canActivate:[AuthGuard]},
+{path:'profile', component:ProfileComponent, canActivate:[AuthGuard]},
 {path:'home', component:HomeComponent},
 ];
 
@@ -53,7 +55,8 @@ const appRoutes: Routes = [
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    
   ],
 
   declarations: [
@@ -67,7 +70,8 @@ const appRoutes: Routes = [
     ShowPostComponent,    
   ],
 
-  providers: [ValidateService, AuthService],
+  providers: [ValidateService, AuthService, AuthGuard,{provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
