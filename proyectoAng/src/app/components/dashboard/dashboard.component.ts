@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   form;
   processing = true;
   username;
+  user:any = {name:null};
 
   constructor( private validateService:ValidateService,
     private flashMessage:FlashMessagesService,
@@ -103,7 +104,9 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+      this.authService.authenticatePorfile().subscribe(profile =>{
+        this.user = profile.body.user;
+      })
   }
 
 
