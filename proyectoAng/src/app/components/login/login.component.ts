@@ -27,7 +27,9 @@ export class LoginComponent implements OnInit {
 
     this.auth.authenticateUser(user).subscribe(data =>{
       if (data.body['success']){
-        this.auth.storeUserData((data as any).token, (data as any).user);
+        console.log(data.body['user'])
+        console.log(data.body)
+        this.auth.storeUserData(data.body['token'], JSON.stringify(data.body['user']));
         this.FlashMessages.show('Bienvenido!', {cssClass: 'alert-success', timeout: 3000});
         this.router.navigate(['dashboard'])
       }else{
@@ -35,6 +37,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['login'])
       }
     })
+
+    
   }
 
 }

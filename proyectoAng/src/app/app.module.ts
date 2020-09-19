@@ -60,11 +60,11 @@ const appRoutes: Routes = [
     AppComponent,
     NavbarComponent,
     NavbarHomeComponent,
+    DashboardComponent,
     LoginComponent,
     HomeComponent,
-    DashboardComponent,
     RegisterComponent,
-    ShowPostComponent
+    ShowPostComponent,    
   ],
 
   providers: [ValidateService, AuthService],
