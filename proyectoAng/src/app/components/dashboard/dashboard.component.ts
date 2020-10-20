@@ -86,11 +86,11 @@ export class DashboardComponent implements OnInit {
     this.authService.registerPost(post).subscribe(data =>{
       //console.log("Entre a la funcion", data.body)
       if (data.body['success']){
-        this.flashMessage.show('Post registrado!', {cssClass: 'alert-success', timeout: 3000});
+        this.flashMessage.show('¡Publicación registrada!', {cssClass: 'alert-success', timeout: 3000});
         this.router.navigate(['/dashboard'])
         this.disableFormNewPostForm();
       }else{
-        this.flashMessage.show('Algo salio mal :(', {cssClass: 'alert-danger', timeout: 3000});
+        this.flashMessage.show('Algo salió mal', {cssClass: 'alert-danger', timeout: 3000});
         this.processing = false;
         this.enableFormNewPostForm();
         this.router.navigate(['/dashboard'])

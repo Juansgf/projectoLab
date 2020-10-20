@@ -9,9 +9,9 @@ module.exports.register = (req, res, next) => {
     var user = new User(req.body);
     User.addUser(user, (err, user) => {
         if(err){
-          res.json({success: false, msg:'Failed to register user'});
+          res.json({success: false, msg:'Fallo al registrar usuario'});
         } else {
-          res.json({success: true, msg:'User registered'});
+          res.json({success: true, msg:'Usuario registrado'});
         }
     }); 
 } 
@@ -23,7 +23,7 @@ module.exports.auth = (req, res, next) => {
     User.getUserByUsername(email, (err, user) => {
       if(err) throw err;
       if(!user){
-        return res.json({success: false, msg: 'User not found'});
+        return res.json({success: false, msg: 'Usuario no encontrado'});
       }
   
       User.comparePassword(password, user.password, (err, isMatch) => {
@@ -43,7 +43,7 @@ module.exports.auth = (req, res, next) => {
                 }
             });
         } else {
-          return res.json({success: false, msg: 'Wrong password'});
+          return res.json({success: false, msg: 'Contraseña incorrecta'});
         }
       });
     });

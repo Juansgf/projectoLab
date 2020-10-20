@@ -6,10 +6,10 @@ module.exports.registerPost = (req, res, next) => {
     var post = new Post(req.body);
     post.save().then(item => {
         //res.send(item);
-        res.json({success: true, msg:'Post registrado'});
+        res.json({success: true, msg:'Publicación registrada'});
     })
     .catch(err => {
-      res.json({success: false, msg:'Ocurrio un problema con el post'});
+      res.json({success: false, msg:'Ocurrió un problema con la publicación'});
     });
 
 };
@@ -21,7 +21,7 @@ module.exports.showPosts = (req, res) => {
       res.status(404).send('Not found');
       return;
     }
-    res.send('Post encontrado');
+    res.send('Publicación encontrada');
   });
 }
 
