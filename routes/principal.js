@@ -10,6 +10,7 @@ const config = require('../config/db')
 
 // Register
 router.post('/register', UserController.register);
+router.put('/updateProfile/:id', UserController.update);
 
 //Post
 

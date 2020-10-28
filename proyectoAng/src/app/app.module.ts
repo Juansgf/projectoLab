@@ -67,7 +67,8 @@ const appRoutes: Routes = [
     LoginComponent,
     HomeComponent,
     RegisterComponent,
-    ShowPostComponent,    
+    ShowPostComponent,
+    ProfileComponent    
   ],
 
   providers: [ValidateService, AuthService, AuthGuard,{provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
