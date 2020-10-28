@@ -18,6 +18,8 @@ export class ProfileComponent implements OnInit {
   trabajo2:any = {trabajo:null};
   id:any = {_id:null};
 
+  editProfile = false;
+
 
   nombre:String;
   descr:String;
@@ -43,12 +45,21 @@ export class ProfileComponent implements OnInit {
       console.log(data)
       if (data.body['success']){
         this.flashMessage.show('Usuario actualizado!', {cssClass: 'alert-success', timeout: 3000});
+        this.router.navigate(['/dashboard'])
       }else{
         this.flashMessage.show('Usuario actualizado', {cssClass: 'alert-success', timeout: 3000});
-        this.router.navigate(['/profile'])
-        
+        this.edHProfile();
+        window.location.reload();
       }
     })
+  }
+
+  edProfile() {
+    this.editProfile = true; // Show new blog form
+  }
+
+  edHProfile() {
+    this.editProfile = false; // Show new blog form
   }
 
   ngOnInit(): void {
