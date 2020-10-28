@@ -39,7 +39,8 @@ module.exports.auth = (req, res, next) => {
                 user: {
                     id: user._id,
                     name: user.name,
-                    email: user.email
+                    email: user.email,
+                    icon: user.icon
                 }
             });
         } else {

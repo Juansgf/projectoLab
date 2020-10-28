@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     private FlashMessages:FlashMessagesService) { }
 
   ngOnInit(): void {
-    
+
   }
 
   onLoginSubmit(){
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       password: this.password
     }
 
- 
+
 
     this.auth.authenticateUser(user).subscribe(data =>{
       if (data.body['success']){
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     })
 
 
-    
+
   }
 
 }

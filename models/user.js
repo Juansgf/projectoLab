@@ -27,6 +27,10 @@ const UserSchema = new mongoose.Schema({
     required: [true],
     enum: rolesValidos,
   },
+  icon: {
+    type:String,
+    required: false
+  },
   desc: {
   type: String,
   },

@@ -14,6 +14,13 @@ export class RegisterComponent implements OnInit {
     email:String;
     password:String;
 
+    random(low, high) {
+      return Math.floor(Math.random() * (high - low + 1) + low)
+    }
+
+    idIcon = this.random(1, 800);
+    icon:String = `https://pokeapi.co/api/v2/pokemon/${this.idIcon}`
+
   constructor(private validateService: ValidateService,
     private flashMessage:FlashMessagesService,
     private authService: AuthService,
@@ -26,7 +33,8 @@ export class RegisterComponent implements OnInit {
     const user = {
       name: this.name,
       email: this.email,
-      password: this.password
+      password: this.password,
+      icon: this.icon
     }
 
      // Required Fields
@@ -55,7 +63,5 @@ export class RegisterComponent implements OnInit {
       }
     })
   }
-
-
 
 }
