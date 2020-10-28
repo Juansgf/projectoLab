@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const config = require('../config/db');  
 
+let rolesValidos = {
+  values: ["ADMIN", "USER"],
+  message: '{VALUE} no es un role válido'
+}
+
 // User Schema
 const UserSchema = new mongoose.Schema({
   name: {
@@ -15,7 +20,25 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  role: {
+    type: String,
+    default: 'USER',
+    required: [true],
+    enum: rolesValidos,
+  },
+  desc: {
+  type: String,
+  },
+  trabajo: {
+  type: String,
+  },
+  face: {
+    type: String,
+  },
+  twt: {
+    type: String,
+  },
 });
 
 

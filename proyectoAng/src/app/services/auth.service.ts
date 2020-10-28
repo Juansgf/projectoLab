@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 //import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { identifierModuleUrl } from '@angular/compiler';
+//import { profile } from 'console';
 
 
 @Injectable({
@@ -13,6 +15,8 @@ export class AuthService {
   authToken: any;
   user: any;
   post:any;
+
+  id:any;
 
   constructor(private http:HttpClient, public jwtHelper: JwtHelperService) { }
 
@@ -25,6 +29,8 @@ export class AuthService {
     }).pipe(map((res: HttpResponse<JSON>) => res));
   }
 
+  
+
   authenticateUser(user) {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -34,6 +40,7 @@ export class AuthService {
       observe: 'response'
     }).pipe(map((res: HttpResponse<JSON>) => res));
   }
+
 
   authenticatePorfile() {
     let headers = new HttpHeaders();
@@ -48,6 +55,19 @@ export class AuthService {
       headers: headers,
       observe: 'response'
     }).pipe(map((res: any) => res));
+  }
+
+  
+  updateUser(user,id) {
+    let headers = new HttpHeaders();
+    this.loadToken();
+    headers = headers.set('Authorization', this.authToken);
+    headers = headers.set('Content-Type', 'application/json');
+    console.log(id)
+    return this.http.put('http://localhost:3000/user/updateProfile/'+id, user,{
+      headers: headers,
+      observe: 'response'
+    }).pipe(map((res: HttpResponse<JSON>) => res));
   }
 
   storeUserData(token, user) {
