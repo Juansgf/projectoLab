@@ -1,9 +1,19 @@
-<p>profile works!</p>
-{{user.name}}
-{{user.email}}
-{{user.descr}}
-{{user.trabajo}}
-{{user._id}}
+
+<div class="container">
+  <div class="row">
+      <div class="col"></div>
+      <div class="col">
+          <div class="card">
+              <div class="card-body">
+                  <h4 class="card-title">{{user.name}}</h4>
+                  <h6 class="text-muted card-subtitle mb-2">{{user.email}}</h6>
+                  <p class="card-text">{{user.trabajo}}</p>
+                  <p class="card-text">{{user.desc}}</p>
+                  <a class="card-link" href="#">Editar Perfil</a></div>
+          </div>
+      </div>
+  </div>
+</div>
 
 <div class="container">
     <h1>Edit Profile</h1>

@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
 
   user:any = {name:null};
   email:any = {email:null};
-  desc:any = {desc:null};
+  descripcion:any = {desc:null};
   trabajo2:any = {trabajo:null};
   id:any = {_id:null};
 
@@ -55,7 +55,7 @@ export class ProfileComponent implements OnInit {
     this.authService.authenticatePorfile().subscribe(profile =>{
       this.user = profile.body.user;
       this.email = profile.body.email;
-      this.desc = profile.body.desc;
+      this.descripcion = profile.body.desc;
       this.trabajo2 = profile.body.trabajo;
       this.id = profile.body.user._id;
       console.log(this.id)
