@@ -13,7 +13,8 @@ router.post('/register', UserController.register);
 router.put('/updateProfile/:id', UserController.update);
 
 //Post
-
+router.put('/editPost/:id', PostController.updatePost);
+router.delete('/deletePost/:id', PostController.deletePost);
 router.post('/newPost', PostController.registerPost);
 //router.get('/posts', PostController.showPosts);
 router.post('/allPosts', (req, res, next) => {
