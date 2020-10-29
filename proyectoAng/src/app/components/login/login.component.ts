@@ -12,11 +12,13 @@ export class LoginComponent implements OnInit {
   email:String;
   password:String;
 
+
   constructor(private auth:AuthService,
     private router:Router,
     private FlashMessages:FlashMessagesService) { }
 
   ngOnInit(): void {
+
   }
 
   onLoginSubmit(){
@@ -24,6 +26,8 @@ export class LoginComponent implements OnInit {
       email: this.email,
       password: this.password
     }
+
+
 
     this.auth.authenticateUser(user).subscribe(data =>{
       if (data.body['success']){
@@ -38,7 +42,8 @@ export class LoginComponent implements OnInit {
       }
     })
 
-    
+
+
   }
 
 }

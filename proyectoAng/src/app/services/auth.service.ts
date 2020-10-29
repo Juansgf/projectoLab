@@ -15,7 +15,7 @@ export class AuthService {
   authToken: any;
   user: any;
   post:any;
-
+  role: any;
   id:any;
 
   constructor(private http:HttpClient, public jwtHelper: JwtHelperService) { }
@@ -156,6 +156,10 @@ export class AuthService {
   loggedIn() {
     const token: string = localStorage.getItem('id_token');
   return token != null && !this.jwtHelper.isTokenExpired(token);
+  }
+
+  getRole(role) {
+    return this.role
   }
 
 }

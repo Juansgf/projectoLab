@@ -14,9 +14,11 @@ export class ProfileComponent implements OnInit {
 
   user:any = {name:null};
   email:any = {email:null};
-  desc:any = {desc:null};
+  descripcion:any = {desc:null};
   trabajo2:any = {trabajo:null};
   id:any = {_id:null};
+
+  editProfile = false;
 
 
   nombre:String;
@@ -43,19 +45,28 @@ export class ProfileComponent implements OnInit {
       console.log(data)
       if (data.body['success']){
         this.flashMessage.show('Usuario actualizado!', {cssClass: 'alert-success', timeout: 3000});
+        this.router.navigate(['/dashboard'])
       }else{
         this.flashMessage.show('Usuario actualizado', {cssClass: 'alert-success', timeout: 3000});
-        this.router.navigate(['/profile'])
-        
+        this.edHProfile();
+        window.location.reload();
       }
     })
+  }
+
+  edProfile() {
+    this.editProfile = true; // Show new blog form
+  }
+
+  edHProfile() {
+    this.editProfile = false; // Show new blog form
   }
 
   ngOnInit(): void {
     this.authService.authenticatePorfile().subscribe(profile =>{
       this.user = profile.body.user;
       this.email = profile.body.email;
-      this.desc = profile.body.desc;
+      this.descripcion = profile.body.desc;
       this.trabajo2 = profile.body.trabajo;
       this.id = profile.body.user._id;
       console.log(this.id)

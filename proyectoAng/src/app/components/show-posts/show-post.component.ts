@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { IconService } from 'src/app/services/icon.service';
 import { ShowPostService } from './show-post.service';
-import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -8,11 +9,12 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-show-post',
   templateUrl: './show-post.component.html',
   styleUrls: ['./show-list.component.css'],
-  providers: [ ShowPostService ]
+  providers: [ ShowPostService, IconService ]
 })
 export class ShowPostComponent implements OnInit {
 
   public posts : any [];
+  // icon:any;
 
   constructor(
     private showPostService: ShowPostService,
@@ -25,6 +27,7 @@ export class ShowPostComponent implements OnInit {
 
   ngOnInit(){
     this.getAllPost();
+    // this.getIcon();
   }
 
   getAllPost(){
@@ -52,4 +55,12 @@ export class ShowPostComponent implements OnInit {
     this.router.navigate(['/dashboard']);
   }
 
+  // getIcon(){
+  //   this.iconService.getIcon().subscribe(result => {
+  //     // console.log(result)
+  //     // this.icon = result;
+  //     console.log("resultado api", result['sprites']['front_default']);
+  //     this.icon = result['sprites']['front_default'];
+  //   });
+  // }
 }

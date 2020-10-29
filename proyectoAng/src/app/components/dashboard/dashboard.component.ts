@@ -4,6 +4,7 @@ import {FlashMessagesService} from 'angular2-flash-messages';
 import {Router} from '@angular/router';
 import {ValidateService} from '../../services/validate.service'
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { IconService } from 'src/app/services/icon.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +23,8 @@ export class DashboardComponent implements OnInit {
   processing = true;
   username;
   user:any = {name:null};
+  role:any = {role:null};
+  icon:any;
 
   constructor( 
     private validateService:ValidateService,
@@ -29,7 +32,8 @@ export class DashboardComponent implements OnInit {
     private authService: AuthService,
     //private postService: PostService,
     private formBuilder: FormBuilder,
-    private router:Router ) {
+    private router:Router,
+    private iconService: IconService) {
       this.createNewPostForm();
      }
 
@@ -110,7 +114,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
       this.authService.authenticatePorfile().subscribe(profile =>{
         this.user = profile.body.user;
-      })
+        this.role = profile.body.user.role
+        console.log(this.role)
+      });
+      this.getIcon();
   }
 
 
@@ -119,6 +126,11 @@ export class DashboardComponent implements OnInit {
     window.location.reload(); // Clear all variable states
   }
 
+  getIcon(){
+    this.iconService.getIcon().subscribe(result => {
+      this.icon = result['sprites']['front_default'];
+    });
+  }
 
 }
 

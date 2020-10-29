@@ -4,6 +4,6 @@
   <li><a  *ngIf="!auth.loggedIn()"routerLinkActive="active-link" routerLink="/login">INGRESAR</a></li>
   <li ><a  *ngIf="auth.loggedIn()"routerLinkActive="active-link" routerLink="/profile">PERFIL</a></li>
   <li ><a  *ngIf="!auth.loggedIn()"routerLinkActive="active-link" routerLink="/register">REGISTRARSE</a></li>
-  <li><a  *ngIf="auth.loggedIn()"class="log-out" (click)="onLogoutClick()" class="btn-danger">SALIR</a></li>
+  <li class="right"><a  *ngIf="auth.loggedIn()"class="log-out" (click)="onLogoutClick()" class="btn-danger">SALIR</a></li>
 </ul>
 
