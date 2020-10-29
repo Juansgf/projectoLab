@@ -57,6 +57,15 @@ export class AuthService {
     }).pipe(map((res: any) => res));
   }
 
+  getUserPost(id) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    return this.http.get('http://localhost:3000/user/userPost/'+id,{
+      headers: headers,
+      observe: 'response'
+    }).pipe(map((res: any) => res));
+  }
+
   
   updateUser(user,id) {
     let headers = new HttpHeaders();

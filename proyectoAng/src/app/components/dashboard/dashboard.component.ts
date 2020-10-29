@@ -113,6 +113,8 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/dashboard']);
   }
 
+
+
   ngOnInit(): void {
       this.authService.authenticatePorfile().subscribe(profile =>{
         this.user = profile.body.user;

@@ -10,11 +10,22 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class NavbarComponent implements OnInit {
 
+  role:any = {role:null};
+  showP = false;
+
   constructor(public auth:AuthService,
     private router:Router,
     private FlashMessages:FlashMessagesService) { }
 
   ngOnInit(): void {
+    this.auth.authenticatePorfile().subscribe(profile =>{
+      this.role = profile.body.user.role
+      console.log(this.role)
+
+      if (this.role == "ADMIN"){
+          this.showP = true;
+      }
+    });
   }
 
   onLogoutClick(){

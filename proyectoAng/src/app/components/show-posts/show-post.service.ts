@@ -6,6 +6,11 @@ import {Router} from '@angular/router';
 @Injectable()
 export class ShowPostService {
 
+
+  id:any = {_id:null};
+  idPost:any = {createdBy:null};
+  
+
     constructor(
       private http: HttpClient,
       private authService: AuthService,
@@ -15,6 +20,18 @@ export class ShowPostService {
     }
 
     getAllPost(){
+      this.authService.authenticatePorfile().subscribe(profile =>{
+        this.id = profile.body.user._id
+
+        this.authService.getUserPost(this.id).subscribe(post =>{
+          this.idPost = post.body
+          console.log(this.idPost)
+          
+        });
+
+        //if(this.id == this)
+      });
+
       return this.http.post('http://localhost:3000/user/allPosts',{})
     }
 
@@ -23,6 +40,6 @@ export class ShowPostService {
     reloadPosts() {
       this.router.navigate(['/dashboard']);
     }
-  
+
 
 }

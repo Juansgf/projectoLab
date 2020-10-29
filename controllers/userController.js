@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/db')
 
 const User = mongoose.model('User');
+const Post = require('../models/post')
 
 module.exports.register = (req, res, next) => { 
     var user = new User(req.body);
@@ -75,7 +76,7 @@ module.exports.update = (req, res) => {
 };
 
 module.exports.getPost = async (req, res) => {
-  const post = await Post.find({ user_id: req.params.id });
+  const post = await Post.find({ createdBy: req.params.id });
   console.log(post);
   res.json(post);
 };
