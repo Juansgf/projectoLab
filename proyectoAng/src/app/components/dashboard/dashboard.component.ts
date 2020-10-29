@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
   username;
   user:any = {name:null};
   role:any = {role:null};
+  id:any = {_id:null};
   icon:any;
 
   constructor( 
@@ -75,10 +76,11 @@ export class DashboardComponent implements OnInit {
     this.newPost = true;
     this.processing = true;
 
+
     const post = {
       title: this.form.get('title').value,
-      content: this.form.get('content').value
-      //createdBy : añadir usuario loggeado en este momento
+      content: this.form.get('content').value,
+      createdBy: this.id
     }
 
     console.log(post.title);
@@ -115,6 +117,7 @@ export class DashboardComponent implements OnInit {
       this.authService.authenticatePorfile().subscribe(profile =>{
         this.user = profile.body.user;
         this.role = profile.body.user.role
+        this.id = profile.body.user._id
         console.log(this.role)
       });
       this.getIcon();

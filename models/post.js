@@ -7,7 +7,7 @@ const { post } = require('../routes/principal');
 var PostSchema = new mongoose.Schema({
   title: {type:String, requited:true},
   content: {type:String, required:true},
-  createdBy: {type:String, default: "el loggeado en este momento"},
+  createdBy: {type:String},
   iconBy: {type:String},
   likes: {type: Number, default:0},
   dislikes: {type:Number, default:0},
