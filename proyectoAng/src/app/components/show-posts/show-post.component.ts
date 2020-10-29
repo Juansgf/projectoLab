@@ -15,6 +15,8 @@ export class ShowPostComponent implements OnInit {
 
   public posts : any [];
   // icon:any;
+  id:any = {_id:null};
+  truePost = false;
 
   constructor(
     private showPostService: ShowPostService,
@@ -34,8 +36,23 @@ export class ShowPostComponent implements OnInit {
     this.showPostService.getAllPost().subscribe(result => {
       this.posts = result['post'];
       console.log("TODOS LOS POSTS",this.posts)
+    this.authService.authenticatePorfile().subscribe(profile => {
+      this.id = profile.body.user._id
+
+      const diffPost = this.posts.map(person => person.createdBy == this.id);
+      console.log(diffPost)
+
+      for(var i = 0; i < diffPost.length; i++){
+        if(diffPost[i] = true){
+          
+        }
+      }
+    })
     });
+    
   }
+
+  
 
   likePost(post){
     console.log(post);
