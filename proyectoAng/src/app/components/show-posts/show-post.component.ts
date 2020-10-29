@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { IconService } from 'src/app/services/icon.service';
 import { ShowPostService } from './show-post.service';
+import {Router} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-show-post',
@@ -14,9 +16,14 @@ export class ShowPostComponent implements OnInit {
   public posts : any [];
   // icon:any;
 
-  constructor(private showPostService: ShowPostService, private iconService: IconService) {
-
+  constructor(
+    private showPostService: ShowPostService,
+    private http: HttpClient,
+    private authService: AuthService,
+    private router:Router) {
+    
   }
+
 
   ngOnInit(){
     this.getAllPost();
@@ -26,8 +33,26 @@ export class ShowPostComponent implements OnInit {
   getAllPost(){
     this.showPostService.getAllPost().subscribe(result => {
       this.posts = result['post'];
-      //console.log(this.posts)
+      console.log("TODOS LOS POSTS",this.posts)
     });
+  }
+
+  likePost(post){
+    console.log(post);
+      this.authService.likePost(post).subscribe(data => {
+        this.getAllPost();
+    });
+    
+  }
+
+  dislikePost(post){
+    this.authService.dislikePost(post).subscribe(data => {
+      this.reloadPosts();
+    });
+  }
+
+  reloadPosts() {
+    this.router.navigate(['/dashboard']);
   }
 
   // getIcon(){

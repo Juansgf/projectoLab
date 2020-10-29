@@ -1,28 +1,55 @@
 const mongoose = require('mongoose');
 const config = require('../config/db');
 const User = require('../models/user');
+const { post } = require('../routes/principal');
 
-// User Schema
+// Post Schema
 var PostSchema = new mongoose.Schema({
-  tit: String,
-  cont: String,
-  email: String
+  title: {type:String, requited:true},
+  content: {type:String, required:true},
+  createdBy: {type:String, default: "el loggeado en este momento"},
+  iconBy: {type:String},
+  likes: {type: Number, default:0},
+  dislikes: {type:Number, default:0},
+  comments: [{
+    comment: {type:String},
+  }]
 });
 
 
 const Post = module.exports = mongoose.model('Post', PostSchema);
 
 
-module.exports.findById = function(id, callback) {
+module.exports.getById = function(id, callback) {
   console.log("find by: "+ id);
-  get_collection(function(collection) {
-    collection.findOne({"_id": new ObjectId(id)}, function(err, doc) {
-       callback(doc);
-    });
-  });
+ 
+  Post.findById(id, callback);
+ 
 }
   
-module.exports.getPostByTit = function(tit, callback){
-  const query = {tit: tit}
+module.exports.getPostByTitle = function(title, callback){
+  const query = {title: title}
   Post.findOne(query, callback);
 }
+
+module.exports.registerLikes = function(post, callback){
+  console.log(post);
+  let id = post.id;
+  let likes = post.likes;
+  Post.updateOne({_id: id}, {likes : likes + 1}, function(err, res) {
+    if (err) throw err;
+    console.log("1 document updated");
+  });
+};
+
+
+module.exports.registerDislikes = function(post, callback){
+  console.log(post);
+  let id = post.id;
+  let dislikes = post.dislikes;
+  Post.updateOne({_id: id}, {dislikes : dislikes + 1}, function(err, res) {
+    if (err) throw err;
+    console.log("1 document updated");
+  });
+};
+

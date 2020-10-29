@@ -74,3 +74,9 @@ module.exports.update = (req, res) => {
     });
 };
 
+module.exports.getPost = async (req, res) => {
+  const post = await Post.find({ user_id: req.params.id });
+  console.log(post);
+  res.json(post);
+};
+
