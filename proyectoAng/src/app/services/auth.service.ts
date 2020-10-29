@@ -88,6 +88,7 @@ export class AuthService {
   registerPost(post) {
     let headers = new HttpHeaders();
     headers.append('Contet-Type', 'application/json');
+    console.log("HAY ALGO AQUI");
     return this.http.post('http://localhost:3000/user/newPost', post, {
       headers: headers,
       observe: 'response'
@@ -102,6 +103,48 @@ export class AuthService {
   /*getAllPost(){
     return this.http.get('http://localhost:3000/user/allPosts', {});
   }*/
+
+  
+  /*editPost(postEdited){
+    //this.createAuthenticationHeaders();
+    let headers = new HttpHeaders();
+    headers.append('Contet-Type', 'application/json');
+    return this.http.put('http://localhost:3000/user/updatePost/', postEdited, {
+      headers: headers,
+      observe: 'response'
+    }).pipe(map((res: HttpResponse<JSON>) => res));
+    
+  }
+
+  deletePost(id){
+   
+    let headers = new HttpHeaders();
+    headers.append('Contet-Type', 'application/json');
+    return this.http.delete('http://localhost:3000/user/updatePost/', id);
+  }*/
+
+  likePost(post){
+    const postData = {id:post._id,
+    likes: post.likes};
+    console.log(post.likes);
+    return this.http.put('http://localhost:3000/user/likePost/', postData)
+  }
+
+ /* likePost(id){
+    const postData = {id:id};
+    console.log(id);
+    return this.http.put('http://localhost:3000/user/likePost/', postData, {
+      observe: 'response'
+    }).pipe(map((res: HttpResponse<JSON>) => res));
+  }*/
+
+  dislikePost(post){
+    const postData = {id:post._id,
+      dislikes: post.dislikes};
+      console.log(post.dislikes);
+      return this.http.put('http://localhost:3000/user/dislikePost/', postData)
+  }
+
 
 
   loadToken() {

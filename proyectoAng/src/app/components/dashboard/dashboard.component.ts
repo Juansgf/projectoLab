@@ -23,7 +23,8 @@ export class DashboardComponent implements OnInit {
   username;
   user:any = {name:null};
 
-  constructor( private validateService:ValidateService,
+  constructor( 
+    private validateService:ValidateService,
     private flashMessage:FlashMessagesService,
     private authService: AuthService,
     //private postService: PostService,
@@ -71,10 +72,13 @@ export class DashboardComponent implements OnInit {
     this.processing = true;
 
     const post = {
-      tit: this.form.get('title').value,
-      cont: this.form.get('content').value
+      title: this.form.get('title').value,
+      content: this.form.get('content').value
+      //createdBy : añadir usuario loggeado en este momento
     }
 
+    console.log(post.title);
+    console.log(post.content);
     //  Validar post
     if(!this.validateService.validatePost(post)){
       this.flashMessage.show('Completa todos los campos', {cssClass: 'alert-danger', timeout: 3000});
@@ -84,7 +88,7 @@ export class DashboardComponent implements OnInit {
 
     //Registrar Post
     this.authService.registerPost(post).subscribe(data =>{
-      //console.log("Entre a la funcion", data.body)
+      console.log("Entre a la funcion", data.body)
       if (data.body['success']){
         this.flashMessage.show('¡Publicación registrada!', {cssClass: 'alert-success', timeout: 3000});
         this.router.navigate(['/dashboard'])
@@ -108,6 +112,7 @@ export class DashboardComponent implements OnInit {
         this.user = profile.body.user;
       })
   }
+
 
 
    goBack() {

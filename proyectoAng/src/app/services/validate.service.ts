@@ -22,7 +22,7 @@ export class ValidateService {
 
 
   validatePost(post){
-    if(post.tit == undefined || post.cont == undefined){
+    if(post.title == undefined || post.content == undefined){
       return false;
     } else {
       return true;

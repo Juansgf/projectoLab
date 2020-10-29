@@ -30,6 +30,14 @@ router.post('/allPosts', (req, res, next) => {
     }).sort({'_id': -1})
 })
 
+
+//like
+router.put('/likePost', PostController.registerLikes);
+
+
+//dislike
+router.put('/dislikePost', PostController.registerDislikes);
+
 // Authenticate
 router.post('/authenticate', UserController.auth);
 
@@ -38,6 +46,6 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
     res.json({user: req.user});
 });
 
-
+router.get('/userPost/:id', UserController.getPost);
 
 module.exports = router; 
