@@ -26,8 +26,10 @@ export class DashboardComponent implements OnInit {
   role:any = {role:null};
   id:any = {_id:null};
   icon:any;
+  iconName:any = {icon:null}
+  randomIconPost:any = {icon:null}
 
-  constructor( 
+  constructor(
     private validateService:ValidateService,
     private flashMessage:FlashMessagesService,
     private authService: AuthService,
@@ -72,15 +74,21 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  randomIconPostGenerate(){
+    this.randomIconPost = `https://avatars.dicebear.com/api/gridy/${this.id}.svg`
+  }
+
   addPost() {
     this.newPost = true;
     this.processing = true;
 
+    this.randomIconPostGenerate();
 
     const post = {
       title: this.form.get('title').value,
       content: this.form.get('content').value,
-      createdBy: this.id
+      createdBy: this.id,
+      iconBy: this.randomIconPost
     }
 
     console.log(post.title);
@@ -119,8 +127,9 @@ export class DashboardComponent implements OnInit {
       this.authService.authenticatePorfile().subscribe(profile =>{
         this.user = profile.body.user;
         this.role = profile.body.user.role
-        this.id = profile.body.user._id
-        console.log(this.role)
+        this.id = profile.body.user._id;
+        this.iconName = profile.body.user.icon;
+        // console.log(profile)
       });
       this.getIcon();
   }

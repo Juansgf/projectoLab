@@ -15,6 +15,20 @@ export class IconService{
 
   getIcon(){
     this.apiUrl = JSON.parse(localStorage.getItem('user'));
+    // console.log("apiUrl", this.apiUrl)
     return this.http.get(this.apiUrl.icon, {});
   }
+
+  getIconPosts(urlIconPost){
+    console.log("posts recibidos", urlIconPost)
+    // for(var i = 0; i < post.length; i++){
+    //   this.apiUrl = post[i].iconBy;
+    //   console.log("urls recibidos", this.apiUrl)
+    //   return this.http.get(this.apiUrl, {});
+    // }
+    this.apiUrl = urlIconPost;
+    console.log("urls recibida", this.apiUrl)
+    return this.http.get(this.apiUrl, {});
+  }
+
 }

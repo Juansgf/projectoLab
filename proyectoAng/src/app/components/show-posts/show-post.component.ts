@@ -17,13 +17,15 @@ export class ShowPostComponent implements OnInit {
   // icon:any;
   id:any = {_id:null};
   truePost = false;
+  icon:any;
 
   constructor(
     private showPostService: ShowPostService,
     private http: HttpClient,
     private authService: AuthService,
-    private router:Router) {
-    
+    private router:Router,
+    private iconService:IconService) {
+
   }
 
 
@@ -35,6 +37,7 @@ export class ShowPostComponent implements OnInit {
   getAllPost(){
     this.showPostService.getAllPost().subscribe(result => {
       this.posts = result['post'];
+      // console.log(result)
       console.log("TODOS LOS POSTS",this.posts)
     this.authService.authenticatePorfile().subscribe(profile => {
       this.id = profile.body.user._id
@@ -44,22 +47,27 @@ export class ShowPostComponent implements OnInit {
 
       for(var i = 0; i < diffPost.length; i++){
         if(diffPost[i] = true){
-          
+
         }
       }
     })
     });
-    
+
+      // for(var i = 0; i < this.posts.length; i++){
+      //   console.log("en el for")
+      //   this.getIconPosts(this.posts[i].iconBy);
+      // }
+
   }
 
-  
+
 
   likePost(post){
-    console.log(post);
+    console.log("likes", post);
       this.authService.likePost(post).subscribe(data => {
         this.getAllPost();
     });
-    
+
   }
 
   dislikePost(post){
@@ -77,6 +85,15 @@ export class ShowPostComponent implements OnInit {
   //     // console.log(result)
   //     // this.icon = result;
   //     console.log("resultado api", result['sprites']['front_default']);
+  //     this.icon = result['sprites']['front_default'];
+  //   });
+  // }
+
+  // getIconPosts(iconPostUrl){
+  //   this.iconService.getIconPosts(iconPostUrl).subscribe(result => {
+  //     // console.log(result)
+  //     // this.icon = result;
+  //     console.log("resultado posts api", result['sprites']['front_default']);
   //     this.icon = result['sprites']['front_default'];
   //   });
   // }
