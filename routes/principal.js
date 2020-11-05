@@ -39,6 +39,9 @@ router.put('/likePost', PostController.registerLikes);
 //dislike
 router.put('/dislikePost', PostController.registerDislikes);
 
+//addComments
+router.put('/addComment', PostController.addCommentPost);
+
 // Authenticate
 router.post('/authenticate', UserController.auth);
 

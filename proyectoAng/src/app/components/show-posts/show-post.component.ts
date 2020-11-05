@@ -4,6 +4,9 @@ import { IconService } from '../../services/icon.service';
 import { ShowPostService } from './show-post.service';
 import {Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ValidateService } from 'src/app/services/validate.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-show-post',
@@ -18,14 +21,19 @@ export class ShowPostComponent implements OnInit {
   id:any = {_id:null};
   truePost = false;
   icon:any;
+  form;
+  randomIconComment:any;
 
   constructor(
     private showPostService: ShowPostService,
     private http: HttpClient,
     private authService: AuthService,
     private router:Router,
-    private iconService:IconService) {
-
+    private iconService:IconService,
+    private formBuilder: FormBuilder,
+    private validateService:ValidateService,
+    private flashMessage:FlashMessagesService) {
+      this.createCommentForm();
   }
 
 
@@ -97,4 +105,48 @@ export class ShowPostComponent implements OnInit {
   //     this.icon = result['sprites']['front_default'];
   //   });
   // }
+
+  createCommentForm(){
+    this.form = this.formBuilder.group({
+      comment: ['', Validators.compose([
+        Validators.required,
+        Validators.maxLength(250),
+        Validators.minLength(5),
+      ])]
+    })
+  }
+
+  randomIconPostGenerate(idUser){
+    this.randomIconComment = `https://avatars.dicebear.com/api/gridy/${idUser}.svg`
+  }
+
+  addComment(post){
+
+    this.randomIconPostGenerate(post.createdBy);
+    const comment = {
+      postId: post._id,
+      comment: this.form.get('comment').value,
+      createdBy: post.createdBy,
+      iconBy: this.randomIconComment
+    }
+    console.log("Comentario", comment);
+    //  Validar comentario
+    if(!this.validateService.validateComment(comment)){
+      this.flashMessage.show('Completa todos los campos', {cssClass: 'alert-danger', timeout: 3000});
+      return false;
+    }
+
+    //Registrar Comentario
+    this.authService.registerComment(comment).subscribe(data =>{
+      console.log("Entre a la funcion", data.body)
+      if (data.body['success']){
+        this.flashMessage.show('Comentario registrado!', {cssClass: 'alert-success', timeout: 3000});
+        this.router.navigate(['/dashboard'])
+      }else{
+        this.flashMessage.show('Algo salió mal', {cssClass: 'alert-danger', timeout: 3000});
+        this.router.navigate(['/dashboard'])
+      }
+    })
+
+  }
 }

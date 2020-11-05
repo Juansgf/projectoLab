@@ -29,7 +29,7 @@ export class AuthService {
     }).pipe(map((res: HttpResponse<JSON>) => res));
   }
 
-  
+
 
   authenticateUser(user) {
     let headers = new HttpHeaders();
@@ -48,9 +48,9 @@ export class AuthService {
     //let headers = new HttpHeaders();
     //let headers = new HttpHeaders({ 'Authorization': this.authToken });
     headers = headers.set('Authorization', this.authToken);
-    console.log(this.authToken)
+    // console.log(this.authToken)
     headers = headers.set('Content-Type', 'application/json');
-    console.log(headers.get('Authorization'))
+    // console.log(headers.get('Authorization'))
     return this.http.get('http://localhost:3000/user/profile',{
       headers: headers,
       observe: 'response'
@@ -66,7 +66,7 @@ export class AuthService {
     }).pipe(map((res: any) => res));
   }
 
-  
+
   updateUser(user,id) {
     let headers = new HttpHeaders();
     this.loadToken();
@@ -97,7 +97,6 @@ export class AuthService {
   registerPost(post) {
     let headers = new HttpHeaders();
     headers.append('Contet-Type', 'application/json');
-    console.log("HAY ALGO AQUI");
     return this.http.post('http://localhost:3000/user/newPost', post, {
       headers: headers,
       observe: 'response'
@@ -113,7 +112,7 @@ export class AuthService {
     return this.http.get('http://localhost:3000/user/allPosts', {});
   }*/
 
-  
+
   /*editPost(postEdited){
     //this.createAuthenticationHeaders();
     let headers = new HttpHeaders();
@@ -122,11 +121,11 @@ export class AuthService {
       headers: headers,
       observe: 'response'
     }).pipe(map((res: HttpResponse<JSON>) => res));
-    
+
   }
 
   deletePost(id){
-   
+
     let headers = new HttpHeaders();
     headers.append('Contet-Type', 'application/json');
     return this.http.delete('http://localhost:3000/user/updatePost/', id);
@@ -160,8 +159,8 @@ export class AuthService {
     const token = localStorage.getItem('id_token');
     this.authToken = token;
   }
-  
-  
+
+
   loggedIn() {
     const token: string = localStorage.getItem('id_token');
   return token != null && !this.jwtHelper.isTokenExpired(token);
@@ -169,6 +168,15 @@ export class AuthService {
 
   getRole(role) {
     return this.role
+  }
+
+  registerComment(comment) {
+    let headers = new HttpHeaders();
+    headers.append('Contet-Type', 'application/json');
+    return this.http.put('http://localhost:3000/user/addComment', comment, {
+      headers: headers,
+      observe: 'response'
+    }).pipe(map((res: HttpResponse<JSON>) => res));
   }
 
 }

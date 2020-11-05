@@ -29,4 +29,12 @@ export class ValidateService {
     }
   }
 
+  validateComment(comment){
+    if(comment.comment == undefined){
+      return false;
+    } else {
+      return true;
+    }
+  }
+
 }
