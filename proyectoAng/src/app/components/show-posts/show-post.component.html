@@ -57,5 +57,19 @@
       </div>
   </div>
 
+  <div>
+    <form [formGroup]="form" name="postForm" (submit)="addComment(post)">
+      <h2>Nueva comentario</h2>
+      <div class="form-group">
+        <label>Comentario</label>
+        <div >
+          <input type="text"  id="tituloC" name="title" class="form-control" formControlName="comment">
+        </div>
+      </div>
+      <button  type="button" class="btn btn-danger" style="margin-right: 1rem;">Cancelar</button>
+      <input  type="submit" class="btn btn-success" id="publicarC" value="Publicar">
+    </form>
+  </div>
+
 </div>
 

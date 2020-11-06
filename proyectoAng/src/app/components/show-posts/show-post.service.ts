@@ -26,7 +26,7 @@ export class ShowPostService {
         this.id = profile.body.user._id
         this.authService.getUserPost(this.id).subscribe(post =>{
           this.idPost = post.body
-          console.log(this.idPost)
+          // console.log(this.idPost)
         });
 
         //if(this.id == this)

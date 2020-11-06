@@ -15,6 +15,21 @@ module.exports.registerPost = (req, res, next) => {
 
 };
 
+module.exports.addCommentPost = (req, res) => {
+  console.log("Req Body comentarios ", req.body);
+  if (!req.body.postId) {
+      res.json({ success: false, message: "No se especificó un id"});
+  }else{
+      Post.getById(req.body.postId, (err, post) =>{
+          if(err){
+              res.json({success:false, message: "Hubo un error"});
+          }else{
+            Post.addComment(req.body);
+          }
+      })
+  }
+};
+
 module.exports.showPosts = (req, res) => {
   let id = req.body.id;
   Post.getPostById(id).then((post) => {
@@ -27,7 +42,6 @@ module.exports.showPosts = (req, res) => {
 };
 
 module.exports.registerLikes = (req, res) => {
-  
     console.log("Req Body is", req.body);
     if (!req.body.id) {
         res.json({ success: false, message: "No se especificó un id"});
