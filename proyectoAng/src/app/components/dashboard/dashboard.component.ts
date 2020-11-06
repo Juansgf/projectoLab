@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {ValidateService} from '../../services/validate.service'
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IconService } from 'src/app/services/icon.service';
+import { ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -36,6 +37,7 @@ export class DashboardComponent implements OnInit {
     //private postService: PostService,
     private formBuilder: FormBuilder,
     private router:Router,
+    private elementRef: ElementRef,
     private iconService: IconService) {
       this.createNewPostForm();
      }
@@ -132,6 +134,7 @@ export class DashboardComponent implements OnInit {
         // console.log(profile)
       });
       this.getIcon();
+      this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = 'white';
   }
 
 

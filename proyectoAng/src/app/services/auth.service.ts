@@ -17,6 +17,7 @@ export class AuthService {
   post:any;
   role: any;
   id:any;
+  idPost:any;
 
   constructor(private http:HttpClient, public jwtHelper: JwtHelperService) { }
 
@@ -66,6 +67,7 @@ export class AuthService {
     }).pipe(map((res: any) => res));
   }
 
+ 
   
   updateUser(user,id) {
     let headers = new HttpHeaders();
@@ -123,14 +125,14 @@ export class AuthService {
       observe: 'response'
     }).pipe(map((res: HttpResponse<JSON>) => res));
     
-  }
+  }*/
 
-  deletePost(id){
-   
+  deletePost(idPost){
     let headers = new HttpHeaders();
     headers.append('Contet-Type', 'application/json');
-    return this.http.delete('http://localhost:3000/user/updatePost/', id);
-  }*/
+    return this.http.delete('http://localhost:3000/user/deletePost/'+idPost);
+    console.log(idPost)
+  }
 
   likePost(post){
     const postData = {id:post._id,

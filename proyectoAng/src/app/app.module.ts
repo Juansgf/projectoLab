@@ -16,6 +16,7 @@ import { RegisterComponent } from './components/register/register.component'
 import { ProfileComponent } from './components/profile/profile.component';
 import { ShowPostComponent } from './components/show-posts/show-post.component';
 
+
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -28,6 +29,8 @@ import { AuthService } from './services/auth.service';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard'
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { EditPostComponent } from './components/edit-post/edit-post.component';
+import { AdminGuard } from './guards/admin.guard';
 
 
 
@@ -37,8 +40,9 @@ const appRoutes: Routes = [
 {path:'register', component:RegisterComponent},
 {path:'login', component:LoginComponent},
 {path:'dashboard', component:DashboardComponent, canActivate:[AuthGuard]},
-{path:'profile', component:ProfileComponent, data:{roles:['USER']},canActivate:[AuthGuard]},
+{path:'profile', component:ProfileComponent,canActivate:[AdminGuard]},
 {path:'home', component:HomeComponent},
+{path:'edit-post/:post_id', component:EditPostComponent},
 ];
 
 @NgModule({
@@ -68,7 +72,8 @@ const appRoutes: Routes = [
     HomeComponent,
     RegisterComponent,
     ShowPostComponent,
-    ProfileComponent    
+    ProfileComponent,
+    EditPostComponent    
   ],
 
   providers: [ValidateService, AuthService, AuthGuard,{provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

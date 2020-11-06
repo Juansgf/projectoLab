@@ -1,0 +1,61 @@
+
+.container.editPost {
+    background-color: white;
+    margin-top: 10%;
+    border-radius: 15px;
+    padding-top: 10px;
+    padding-left: 35px;
+    padding-bottom: 20px;
+  }
+  
+  .col.editPlace {
+    /*display: inline-grid;*/
+    /*height: 24%;*/
+    padding: 10px;
+  }
+  
+  .inputStyle {
+    width: 60%;
+    border: none;
+    border-bottom: 2px solid #0069d9;
+  }
+  
+  .btn:not(:disabled):not(.disabled) {
+    width: 40%;
+  }
+  
+  .input2Style {
+    width: 100%;
+    padding: 23px;
+    border: none;
+    border-bottom: 2px solid #0069d9;
+  }
+  
+ 
+  
+  .setButtons2 {
+    padding-top: 17px;
+    padding-left: 32px;
+  }
+  
+  .titleSt {
+    color: #0069d9;
+    font-weight: bolder;
+  }
+  
+  .contenSt {
+    padding-top: 28px;
+    color: #0069d9;
+    font-weight: bolder;
+  }
+  
+  .row.btnsRow {
+    text-align: center;
+    height: 50%;
+  }
+  
+  .row.btns2Row {
+    text-align: center;
+    height: 50%;
+    padding-top: 15%;
+  }

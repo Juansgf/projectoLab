@@ -19,6 +19,8 @@ export class ShowPostComponent implements OnInit {
   truePost = false;
   icon:any;
 
+  user_id : String
+
   constructor(
     private showPostService: ShowPostService,
     private http: HttpClient,
@@ -32,13 +34,25 @@ export class ShowPostComponent implements OnInit {
   ngOnInit(){
     this.getAllPost();
     // this.getIcon();
+    
   }
+
+  deletePost(idPost){
+    this.authService.deletePost(idPost).subscribe(data => {
+      console.log("Post deleted with id "+idPost)
+      console.log(data)
+    })
+    window.location.reload();
+  }
+
+  
 
   getAllPost(){
     this.showPostService.getAllPost().subscribe(result => {
       this.posts = result['post'];
       // console.log(result)
-      console.log("TODOS LOS POSTS",this.posts)
+      console.log("TODOS LOS POSTS",this.posts[0]._id)
+
     this.authService.authenticatePorfile().subscribe(profile => {
       this.id = profile.body.user._id
 
