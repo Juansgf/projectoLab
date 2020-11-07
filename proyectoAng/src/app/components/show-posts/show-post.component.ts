@@ -17,6 +17,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 export class ShowPostComponent implements OnInit {
 
   public posts : any [];
+  public comments : any [];
   // icon:any;
   id:any = {_id:null};
   truePost = false;
@@ -25,6 +26,9 @@ export class ShowPostComponent implements OnInit {
   randomIconComment:any;
 
   user_id : String
+
+  newComment = false;
+  showComment = false;
 
   constructor(
     private showPostService: ShowPostService,
@@ -42,7 +46,7 @@ export class ShowPostComponent implements OnInit {
   ngOnInit(){
     this.getAllPost();
     // this.getIcon();
-    
+
   }
 
   deletePost(idPost){
@@ -53,13 +57,13 @@ export class ShowPostComponent implements OnInit {
     window.location.reload();
   }
 
-  
+
 
   getAllPost(){
     this.showPostService.getAllPost().subscribe(result => {
       this.posts = result['post'];
       // console.log(result)
-      console.log("TODOS LOS POSTS",this.posts[0]._id)
+      console.log("TODOS LOS POSTS",this.posts)
 
     this.authService.authenticatePorfile().subscribe(profile => {
       this.id = profile.body.user._id
@@ -161,6 +165,27 @@ export class ShowPostComponent implements OnInit {
         this.router.navigate(['/dashboard'])
       }
     })
-
   }
+
+  newCommentForm(){
+    this.newComment = true;
+    this.showComment = false;
+  }
+
+  showComments(){
+    this.showComment = true;
+  }
+
+  cancelShowComments() {
+    this.showComment = false;
+  }
+
+  cancelCommentForm() {
+    this.newComment = false;
+  }
+
+  reloadPage(){
+    window.location.reload();
+  }
+
 }

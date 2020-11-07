@@ -11,7 +11,7 @@
       <div class="row">
         <div class="col">
 
-          <button class="btn btn-success" style="margin-right: 1rem;">Comentar</button>
+          <button class="btn btn-success" style="margin-right: 1rem;" (click)="newCommentForm()">Comentar</button>
 
           <button class="btn btn-primary" style="margin-right: 1rem;" name="like" (click)="likePost(post)">
             <span>
@@ -31,6 +31,13 @@
             Dislikes: {{post.dislikes}}
           </button>
 
+          <button class="btn btn-secondary" name="verComments" style="margin-right: 1rem" *ngIf="!showComment" (click)="showComments()">
+            Ver comentarios
+          </button>
+          <button class="btn btn-light" name="verComments" style="margin-right: 1rem" *ngIf="showComment" (click)="cancelShowComments()">
+            Menos comentarios
+          </button>
+
         </div>
 
         <div class="col-md-auto">
@@ -44,8 +51,8 @@
         </div>
 
         <div cñass="col col-lg-2">
-          <button  class="btn btn-danger"  (click)="deletePost(post._id)" *ngIf="post.createdBy == id" name="delete" style="margin-right: 1rem;">
-            
+          <button  class="btn btn-danger" (click)="deletePost(post._id)" *ngIf="post.createdBy == id" name="delete" style="margin-right: 1rem;">
+
             <span>
               <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
@@ -53,23 +60,38 @@
             </span>
           </button>
         </div>
-
       </div>
   </div>
 
-  <div>
-    <form [formGroup]="form" name="postForm" (submit)="addComment(post)">
-      <h2>Nueva comentario</h2>
-      <div class="form-group">
-        <label>Comentario</label>
-        <div >
-          <input type="text"  id="tituloC" name="title" class="form-control" formControlName="comment">
+  <div *ngIf="showComment">
+    <div class="card w-75" *ngFor="let comentario of post.comments" style="margin-left: 25%;">
+      <div class="card-header">
+        Comentario de:
+        <!-- <img src={{post.iconBy}} height="50px" width="50px"/> -->
+      </div>
+      <div class="card-body">
+        <p>{{comentario.comment}}</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card" *ngIf="newComment">
+    <div class="card-header">
+      Nueva comentario
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form" name="postForm" (submit)="addComment(post)">
+        <div class="form-group">
+          <label>Escibre aquí tu comentario</label>
+          <div >
+            <input type="text"  id="tituloC" name="title" class="form-control" formControlName="comment">
+          </div>
         </div>
-      </div>
-      <button  type="button" class="btn btn-danger" style="margin-right: 1rem;">Cancelar</button>
-      <input  type="submit" class="btn btn-success" id="publicarC" value="Publicar">
-    </form>
+        <button  type="button" class="btn btn-danger" style="margin-right: 1rem;" (click)="cancelCommentForm()">Cancelar</button>
+        <input  type="submit" class="btn btn-success" id="publicarC" (click)="reloadPage()" value="Publicar">
+      </form>
+    </div>
   </div>
-
 </div>
 
