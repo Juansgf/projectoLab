@@ -45,8 +45,6 @@ export class ShowPostComponent implements OnInit {
 
   ngOnInit(){
     this.getAllPost();
-    // this.getIcon();
-
   }
 
   deletePost(idPost){
@@ -57,36 +55,47 @@ export class ShowPostComponent implements OnInit {
     window.location.reload();
   }
 
-
-
   getAllPost(){
     this.showPostService.getAllPost().subscribe(result => {
       this.posts = result['post'];
       // console.log(result)
       console.log("TODOS LOS POSTS",this.posts)
 
-    this.authService.authenticatePorfile().subscribe(profile => {
-      this.id = profile.body.user._id
+      this.authService.authenticatePorfile().subscribe(profile => {
+        this.id = profile.body.user._id
 
-      const diffPost = this.posts.map(person => person.createdBy == this.id);
-      console.log(diffPost)
+        const diffPost = this.posts.map(person => person.createdBy == this.id);
+        console.log(diffPost)
 
-      for(var i = 0; i < diffPost.length; i++){
-        if(diffPost[i] = true){
+        for(var i = 0; i < diffPost.length; i++){
+          if(diffPost[i] = true){
 
+          }
         }
-      }
-    })
+      })
     });
-
-      // for(var i = 0; i < this.posts.length; i++){
-      //   console.log("en el for")
-      //   this.getIconPosts(this.posts[i].iconBy);
-      // }
-
   }
 
+  getPopularPost(){
+    this.showPostService.getAllPopularPost().subscribe(result => {
+      this.posts = result['post'];
+      // console.log(result)
+      console.log("TODOS LOS POSTS POPULARES",this.posts)
 
+      this.authService.authenticatePorfile().subscribe(profile => {
+        this.id = profile.body.user._id
+
+        const diffPost = this.posts.map(person => person.createdBy == this.id);
+        console.log(diffPost)
+
+        for(var i = 0; i < diffPost.length; i++){
+          if(diffPost[i] = true){
+
+          }
+        }
+      })
+    });
+  }
 
   likePost(post){
     console.log("likes", post);

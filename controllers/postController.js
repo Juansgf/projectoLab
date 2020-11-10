@@ -111,9 +111,63 @@ module.exports.updatePost = (req, res) => {
       });
   };
 
-  module.exports.deletePost = async (req, res) => {
-    await Post.findByIdAndDelete(req.params.id);
-    res.json("Post deleted");
-  };
+module.exports.deletePost = async (req, res) => {
+  await Post.findByIdAndDelete(req.params.id);
+  res.json("Post deleted");
+};
+
+module.exports.adminPosts = (req, res) => {
+  console.log("Req Body admin posts ", req.body);
+  Post.aggregate([
+    {
+      $lookup:
+        {
+          from: "users",
+          pipeline: [
+            { $match: { role: 'ADMIN' } }
+         ],
+         as: "roleUser"
+        }
+    }
+  ], (err, posts) => {
+    if(err){
+        res.json({ success: false, message: err})
+    } else{
+        if(!posts){
+            res.json({ success: false, message: "No hay posts"})
+        } else {
+            res.json({ success: true, post: posts})
+        }
+    }
+  })
+};
+
+module.exports.mostLikePosts = (req, res) => {
+  Post.find({}, (err, posts) => {
+    if(err){
+        res.json({ success: false, message: err})
+    } else{
+        if(!posts){
+            res.json({ success: false, message: "No hay posts"})
+        } else {
+            res.json({ success: true, post: posts})
+        }
+    }
+  }).sort({'likes': -1})
+};
+
+module.exports.showAllPosts = (req, res) => {
+  Post.find({}, (err, posts) => {
+    if(err){
+        res.json({ success: false, message: err})
+    } else{
+        if(!posts){
+            res.json({ success: false, message: "No hay posts"})
+        } else {
+            res.json({ success: true, post: posts})
+        }
+    }
+  }).sort({'_id': -1})
+};
 
 

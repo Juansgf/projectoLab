@@ -16,25 +16,15 @@ router.put('/updateProfile/:id', UserController.update);
 router.put('/editPost/:id', PostController.updatePost);
 router.delete('/deletePost/:id', PostController.deletePost);
 router.post('/newPost', PostController.registerPost);
-//router.get('/posts', PostController.showPosts);
-router.post('/allPosts', (req, res, next) => {
-    Post.find({}, (err, posts) => {
-        if(err){
-            res.json({ success: false, message: err})
-        } else{
-            if(!posts){
-                res.json({ success: false, message: "No hay posts"})
-            } else {
-                res.json({ success: true, post: posts})
-            }
-        }
-    }).sort({'_id': -1})
-})
 
+router.post('/allPosts', PostController.showAllPosts);
+
+router.post('/mostLikedPosts', PostController.mostLikePosts);
+
+router.post('/adminPosts', PostController.adminPosts);
 
 //like
 router.put('/likePost', PostController.registerLikes);
-
 
 //dislike
 router.put('/dislikePost', PostController.registerDislikes);

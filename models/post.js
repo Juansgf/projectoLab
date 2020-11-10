@@ -68,3 +68,23 @@ module.exports.addComment = function(post, callback){
   });
 };
 
+// module.exports.aggregateAdmin = function(post, callback) {
+//   console.log("agreggate: "+ post);
+ 
+//   Post.aggregate([
+//     {
+//       $lookup:
+//         {
+//           from: "users",
+//           pipeline: [
+//             { $match: { role: 'ADMIN' } }
+//          ],
+//          as: "roleUser"
+//         }
+//     }
+//   ]);
+ 
+// }
+
+
+
