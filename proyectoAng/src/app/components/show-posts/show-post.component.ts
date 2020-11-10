@@ -134,13 +134,14 @@ export class ShowPostComponent implements OnInit {
     })
   }
 
-  randomIconPostGenerate(idUser){
-    this.randomIconComment = `https://avatars.dicebear.com/api/gridy/${idUser}.svg`
+  randomIconPostGenerate(idUser, idPost){
+    const iconComment = idUser + idPost
+    this.randomIconComment = `https://avatars.dicebear.com/api/gridy/${iconComment}.svg`
   }
 
   addComment(post){
 
-    this.randomIconPostGenerate(post.createdBy);
+    this.randomIconPostGenerate(this.id, post._id);
     const comment = {
       postId: post._id,
       comment: this.form.get('comment').value,

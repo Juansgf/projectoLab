@@ -14,7 +14,8 @@ var PostSchema = new mongoose.Schema({
   comments: [{
     postId: {type:String},
     comment: {type:String},
-    createdBy: {type:String}
+    createdBy: {type:String},
+    iconBy: {type:String}
   }]
 });
 

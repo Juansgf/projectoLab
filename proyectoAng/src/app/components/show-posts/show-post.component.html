@@ -67,7 +67,7 @@
     <div class="card w-75" *ngFor="let comentario of post.comments" style="margin-left: 25%;">
       <div class="card-header">
         Comentario de:
-        <!-- <img src={{post.iconBy}} height="50px" width="50px"/> -->
+        <img src={{comentario.iconBy}} height="30px" width="30px"/>
       </div>
       <div class="card-body">
         <p>{{comentario.comment}}</p>
