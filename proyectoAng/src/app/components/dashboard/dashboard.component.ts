@@ -86,11 +86,14 @@ export class DashboardComponent implements OnInit {
 
     this.randomIconPostGenerate();
 
+    const fecha = new Date();
+
     const post = {
       title: this.form.get('title').value,
       content: this.form.get('content').value,
       createdBy: this.id,
-      iconBy: this.randomIconPost
+      iconBy: this.randomIconPost,
+      postTime: fecha
     }
 
     console.log(post.title);

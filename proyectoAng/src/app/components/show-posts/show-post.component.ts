@@ -97,6 +97,29 @@ export class ShowPostComponent implements OnInit {
     });
   }
 
+  getAdminPost(){
+    this.showPostService.getAllAdminPost().subscribe(result => {
+      console.log("Picado")
+      const temp = result['post'];
+      this.posts = result['post'];
+      // console.log(result)
+      console.log("TODOS LOS POSTS ADMIN",this.posts)
+
+      // this.authService.authenticatePorfile().subscribe(profile => {
+      //   this.id = profile.body.user._id
+
+      //   const diffPost = this.posts.map(person => person.createdBy == this.id);
+      //   console.log(diffPost)
+
+      //   for(var i = 0; i < diffPost.length; i++){
+      //     if(diffPost[i] = true){
+
+      //     }
+      //   }
+      // })
+    });
+  }
+
   likePost(post){
     console.log("likes", post);
       this.authService.likePost(post).subscribe(data => {
@@ -183,6 +206,7 @@ export class ShowPostComponent implements OnInit {
   }
 
   showComments(){
+    this.newComment = false;
     this.showComment = true;
   }
 

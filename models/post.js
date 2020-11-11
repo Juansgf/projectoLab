@@ -11,6 +11,7 @@ var PostSchema = new mongoose.Schema({
   iconBy: {type:String},
   likes: {type: Number, default:0},
   dislikes: {type:Number, default:0},
+  postTime: {type:String},
   comments: [{
     postId: {type:String},
     comment: {type:String},

@@ -40,13 +40,20 @@ export class ShowPostService {
         this.id = profile.body.user._id
         this.authService.getUserPost(this.id).subscribe(post =>{
           this.idPost = post.body
-          // console.log(this.idPost)
         });
-
-        //if(this.id == this)
       });
 
       return this.http.post('http://localhost:3000/user/mostLikedPosts',{})
+    }
+
+    getAllAdminPost(){
+      this.authService.authenticatePorfile().subscribe(profile =>{
+        this.id = profile.body.user._id
+        this.authService.getUserPost(this.id).subscribe(post =>{
+          this.idPost = post.body
+        });
+      });
+      return this.http.post('http://localhost:3000/user/adminPosts',{})
     }
 
 

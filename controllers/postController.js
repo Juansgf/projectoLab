@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const Post = mongoose.model('Post');
+const User = mongoose.model('User');
 
 module.exports.registerPost = (req, res, next) => {
     var post = new Post(req.body);
@@ -118,16 +119,20 @@ module.exports.deletePost = async (req, res) => {
 
 module.exports.adminPosts = (req, res) => {
   console.log("Req Body admin posts ", req.body);
-  Post.aggregate([
+  User.aggregate([
+    { $addFields: { 'userId': { $toString: '$_id' }}},
     {
-      $lookup:
-        {
-          from: "users",
-          pipeline: [
-            { $match: { role: 'ADMIN' } }
-         ],
-         as: "roleUser"
-        }
+      $match: {
+        role: 'ADMIN'
+      }
+    },
+    {
+      $lookup: {
+        from: 'posts',
+        localField: 'userId',
+        foreignField: 'createdBy',
+        as: 'post'
+      }
     }
   ], (err, posts) => {
     if(err){
@@ -169,5 +174,3 @@ module.exports.showAllPosts = (req, res) => {
     }
   }).sort({'_id': -1})
 };
-
-

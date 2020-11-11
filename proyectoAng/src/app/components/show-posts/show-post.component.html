@@ -1,7 +1,7 @@
 <div class="btn-group" role="group" style="left: 70%;">
   <button type="button" class="btn btn-secondary" (click)="getAllPost()">Recientes</button>
   <button type="button" class="btn btn-secondary" (click)="getPopularPost()">Populares</button>
-  <button type="button" class="btn btn-secondary">Admins</button>
+  <button type="button" class="btn btn-secondary" (click)="getAdminPost()">Admins</button>
 </div>
 
 <div *ngFor="let post of posts" class="card" style="width: 80%; margin-top:10px; margin-left: 10%; margin-right: 10%;">
@@ -9,7 +9,7 @@
     <div class="d-flex w-100 justify-content-between">
       <h3 style="color:#0069d9;">Título: {{post.title}}  </h3>
       <!-- <img src={{icon}}/> -->
-      <small>Hace 3 días <br> <img src={{post.iconBy}} height="50px" width="50px"/> </small>
+      <small>{{post.postTime}} <br> <img src={{post.iconBy}} height="50px" width="50px"/> </small>
 
     </div>
       <p class="card-text">Contenido: {{post.content}}</p>
@@ -56,7 +56,7 @@
           </button>
         </div>
 
-        <div cñass="col col-lg-2">
+        <div class="col col-lg-2">
           <button  class="btn btn-danger" (click)="deletePost(post._id)" *ngIf="post.createdBy == id" name="delete" style="margin-right: 1rem;">
 
             <span>

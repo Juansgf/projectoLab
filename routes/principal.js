@@ -17,10 +17,9 @@ router.put('/editPost/:id', PostController.updatePost);
 router.delete('/deletePost/:id', PostController.deletePost);
 router.post('/newPost', PostController.registerPost);
 
+//Posts filters
 router.post('/allPosts', PostController.showAllPosts);
-
 router.post('/mostLikedPosts', PostController.mostLikePosts);
-
 router.post('/adminPosts', PostController.adminPosts);
 
 //like
