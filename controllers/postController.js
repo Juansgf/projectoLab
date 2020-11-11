@@ -117,24 +117,73 @@ module.exports.deletePost = async (req, res) => {
   res.json("Post deleted");
 };
 
+// module.exports.adminPosts = (req, res) => {
+//   console.log("Req Body admin posts ", req.body);
+//   User.aggregate([
+//     { $addFields: { 'userId': { $toString: '$_id' }}},
+//     {
+//       $match: {
+//         role: 'ADMIN'
+//       }
+//     },
+//     {
+//       $lookup: {
+//         from: 'posts',
+//         localField: 'userId',
+//         foreignField: 'createdBy',
+//         as: 'post'
+//       }
+//     }
+//   ], (err, posts) => {
+//     if(err){
+//         res.json({ success: false, message: err})
+//     } else{
+//         if(!posts){
+//             res.json({ success: false, message: "No hay posts"})
+//         } else {
+//             res.json({ success: true, post: posts})
+//         }
+//     }
+//   })
+// };
+
+// module.exports.adminPosts = (req, res) => {
+//   console.log("Req Body admin posts ", req.body);
+//   User.aggregate([
+//     { $addFields: { 'userId': { $toString: '$_id' }}},
+//     {
+//       $match: {
+//         role: 'ADMIN'
+//       }
+//     },
+//     {
+//       $lookup: {
+//         from: 'posts',
+//         localField: 'userId',
+//         foreignField: 'createdBy',
+//         as: 'admin_posts'
+//       }
+//     },
+//     // { $addFields: { 'postId': { $arrayElemAt: [ "$admin_posts", 0 ] }}},
+//     {
+//       $replaceRoot: { newRoot: { $mergeObjects: [ { $arrayElemAt: [ "$admin_posts", 0 ] }, "$$ROOT" ] } }
+//     },
+//     { $project: { 'admin_posts': 0 } }
+//   ], (err, posts) => {
+//     if(err){
+//         res.json({ success: false, message: err})
+//     } else{
+//         if(!posts){
+//             res.json({ success: false, message: "No hay posts"})
+//         } else {
+//             res.json({ success: true, post: posts})
+//         }
+//     }
+//   })
+// };
+
 module.exports.adminPosts = (req, res) => {
-  console.log("Req Body admin posts ", req.body);
-  User.aggregate([
-    { $addFields: { 'userId': { $toString: '$_id' }}},
-    {
-      $match: {
-        role: 'ADMIN'
-      }
-    },
-    {
-      $lookup: {
-        from: 'posts',
-        localField: 'userId',
-        foreignField: 'createdBy',
-        as: 'post'
-      }
-    }
-  ], (err, posts) => {
+  Post.find({roleBy: 'ADMIN'}, (err, posts) => {
     if(err){
         res.json({ success: false, message: err})
     } else{
@@ -144,8 +193,9 @@ module.exports.adminPosts = (req, res) => {
             res.json({ success: true, post: posts})
         }
     }
-  })
+  }).sort({'_id': -1})
 };
+
 
 module.exports.mostLikePosts = (req, res) => {
   Post.find({}, (err, posts) => {

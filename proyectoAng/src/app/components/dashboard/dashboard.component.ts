@@ -93,11 +93,11 @@ export class DashboardComponent implements OnInit {
       content: this.form.get('content').value,
       createdBy: this.id,
       iconBy: this.randomIconPost,
-      postTime: fecha
+      postTime: fecha,
+      roleBy: this.role
     }
 
-    console.log(post.title);
-    console.log(post.content);
+    console.log("Post enviado", post);
     //  Validar post
     if(!this.validateService.validatePost(post)){
       this.flashMessage.show('Completa todos los campos', {cssClass: 'alert-danger', timeout: 3000});

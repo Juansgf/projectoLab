@@ -9,6 +9,7 @@ var PostSchema = new mongoose.Schema({
   content: {type:String, required:true},
   createdBy: {type:String},
   iconBy: {type:String},
+  roleBy: {type:String},
   likes: {type: Number, default:0},
   dislikes: {type:Number, default:0},
   postTime: {type:String},
