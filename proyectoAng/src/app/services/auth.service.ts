@@ -67,8 +67,8 @@ export class AuthService {
     }).pipe(map((res: any) => res));
   }
 
- 
-  
+
+
   updateUser(user,id) {
     let headers = new HttpHeaders();
     this.loadToken();
@@ -123,7 +123,7 @@ export class AuthService {
       headers: headers,
       observe: 'response'
     }).pipe(map((res: HttpResponse<JSON>) => res));
-    
+
   }*/
 
   deletePost(idPost){
@@ -137,22 +137,14 @@ export class AuthService {
     const postData = {id:post._id,
     likes: post.likes};
     console.log(post.likes);
-    return this.http.put('http://localhost:3000/user/likePost/', postData)
+    return this.http.post('http://localhost:3000/user/likePost/', postData)
   }
-
- /* likePost(id){
-    const postData = {id:id};
-    console.log(id);
-    return this.http.put('http://localhost:3000/user/likePost/', postData, {
-      observe: 'response'
-    }).pipe(map((res: HttpResponse<JSON>) => res));
-  }*/
 
   dislikePost(post){
     const postData = {id:post._id,
       dislikes: post.dislikes};
       console.log(post.dislikes);
-      return this.http.put('http://localhost:3000/user/dislikePost/', postData)
+      return this.http.post('http://localhost:3000/user/dislikePost/', postData)
   }
 
 

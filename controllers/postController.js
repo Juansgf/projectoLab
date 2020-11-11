@@ -43,7 +43,7 @@ module.exports.showPosts = (req, res) => {
 };
 
 module.exports.registerLikes = (req, res) => {
-    console.log("Req Body is", req.body);
+    // console.log("Req Body is", req.body);
     if (!req.body.id) {
         res.json({ success: false, message: "No se especificó un id"});
     }else{
@@ -57,7 +57,17 @@ module.exports.registerLikes = (req, res) => {
                 }else{ 
                   console.log("2do else", post)
                     Post.registerLikes(post);
-                    //console.log("LLEGO", post.likes);                
+                    Post.find({}, (err, posts) => {
+                      if(err){
+                          res.json({ success: false, message: err})
+                      } else{
+                          if(!posts){
+                              res.json({ success: false, message: "No hay posts"})
+                          } else {
+                              res.json({ success: true, post: posts})
+                          }
+                      }
+                    }).sort({'_id': -1})                     
                 }
             }
         })
@@ -65,9 +75,8 @@ module.exports.registerLikes = (req, res) => {
 };
 
 
-module.exports.registerDislikes = (req, res) => {
-  
-  console.log("Req Body is", req.body);
+module.exports.registerDislikes = (req, res) => {  
+  // console.log("Req Body is", req.body);
   if (!req.body.id) {
       res.json({ success: false, message: "No se especificó un id"});
   }else{
@@ -81,7 +90,17 @@ module.exports.registerDislikes = (req, res) => {
               }else{ 
                 console.log("2do else", post)
                   Post.registerDislikes(post);
-                  //console.log("LLEGO", post.likes);                
+                  Post.find({}, (err, posts) => {
+                    if(err){
+                        res.json({ success: false, message: err})
+                    } else{
+                        if(!posts){
+                            res.json({ success: false, message: "No hay posts"})
+                        } else {
+                            res.json({ success: true, post: posts})
+                        }
+                    }
+                  }).sort({'_id': -1})              
               }
           }
       })

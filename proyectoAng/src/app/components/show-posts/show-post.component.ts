@@ -121,7 +121,6 @@ export class ShowPostComponent implements OnInit {
   likePost(post){
     console.log("likes", post);
       this.authService.likePost(post).subscribe(data => {
-        console.log('Dentro de like', data)
         this.getAllPost();
     });
 
@@ -129,7 +128,7 @@ export class ShowPostComponent implements OnInit {
 
   dislikePost(post){
     this.authService.dislikePost(post).subscribe(data => {
-      this.reloadPosts();
+      this.getAllPost();
     });
   }
 

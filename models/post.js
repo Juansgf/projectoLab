@@ -38,7 +38,7 @@ module.exports.getPostByTitle = function(title, callback){
 }
 
 module.exports.registerLikes = function(post, callback){
-  console.log(post);
+  // console.log(post);
   let id = post.id;
   let likes = post.likes;
   Post.updateOne({_id: id}, {likes : likes + 1}, function(err, res) {
@@ -49,7 +49,7 @@ module.exports.registerLikes = function(post, callback){
 
 
 module.exports.registerDislikes = function(post, callback){
-  console.log(post);
+  // console.log(post);
   let id = post.id;
   let dislikes = post.dislikes;
   Post.updateOne({_id: id}, {dislikes : dislikes + 1}, function(err, res) {

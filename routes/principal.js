@@ -23,10 +23,10 @@ router.post('/mostLikedPosts', PostController.mostLikePosts);
 router.post('/adminPosts', PostController.adminPosts);
 
 //like
-router.put('/likePost', PostController.registerLikes);
+router.post('/likePost', PostController.registerLikes);
 
 //dislike
-router.put('/dislikePost', PostController.registerDislikes);
+router.post('/dislikePost', PostController.registerDislikes);
 
 //addComments
 router.put('/addComment', PostController.addCommentPost);
