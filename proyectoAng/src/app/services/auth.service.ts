@@ -81,6 +81,16 @@ export class AuthService {
     }).pipe(map((res: HttpResponse<JSON>) => res));
   }
 
+  updatePost(post,id) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    console.log(id)
+    return this.http.put('http://localhost:3000/user/editPost/'+id,post,{
+      headers: headers,
+      observe: 'response'
+    }).pipe(map((res: HttpResponse<JSON>) => res));
+  }
+
   storeUserData(token, user) {
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', user);
