@@ -4,8 +4,10 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const Post = require('../models/post');
+const Notification = require('../models/notification');
 const PostController = require('../controllers/postController');
 const UserController = require('../controllers/userController'); 
+const NotificationController = require('../controllers/notificationController');
 const config = require('../config/db')
 
 // Register
@@ -40,5 +42,8 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
 });
 
 router.get('/userPost/:id', UserController.getPost);
+
+//Notificaciones
+router.post('/addNotification', NotificationController.registerNotification);
 
 module.exports = router; 

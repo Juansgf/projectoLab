@@ -157,8 +157,6 @@ export class AuthService {
       return this.http.post('http://localhost:3000/user/dislikePost/', postData)
   }
 
-
-
   loadToken() {
     const token = localStorage.getItem('id_token');
     this.authToken = token;
@@ -167,7 +165,7 @@ export class AuthService {
 
   loggedIn() {
     const token: string = localStorage.getItem('id_token');
-  return token != null && !this.jwtHelper.isTokenExpired(token);
+    return token != null && !this.jwtHelper.isTokenExpired(token);
   }
 
   getRole(role) {
@@ -181,6 +179,10 @@ export class AuthService {
       headers: headers,
       observe: 'response'
     }).pipe(map((res: HttpResponse<JSON>) => res));
+  }
+
+  registerNotification(notification){
+    return this.http.post('http://localhost:3000/user/addNotification/', notification)
   }
 
 }

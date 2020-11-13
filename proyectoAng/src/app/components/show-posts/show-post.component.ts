@@ -119,17 +119,58 @@ export class ShowPostComponent implements OnInit {
   }
 
   likePost(post){
+    this.randomIconPostGenerate(this.id, post._id);
+
     console.log("likes", post);
       this.authService.likePost(post).subscribe(data => {
         this.getAllPost();
     });
 
+    const notificacion = {
+      action: "le dió like",
+      userFrom: this.id,
+      userTo: post.createdBy,
+      iconFrom: this.randomIconComment,
+      actionTime: new Date(),
+      idPost: post._id
+    }
+    //Registrar Notificacion
+    this.authService.registerNotification(notificacion).subscribe(data =>{
+      if (data['success']){
+        this.flashMessage.show('Notificacion registrada!', {cssClass: 'alert-success', timeout: 3000});
+        this.router.navigate(['/dashboard'])
+      }else{
+        this.flashMessage.show('Algo salió mal', {cssClass: 'alert-danger', timeout: 3000});
+        this.router.navigate(['/dashboard'])
+      }
+    })
   }
 
   dislikePost(post){
+    this.randomIconPostGenerate(this.id, post._id);
+
     this.authService.dislikePost(post).subscribe(data => {
       this.getAllPost();
     });
+
+    const notificacion = {
+      action: "le dió dislike",
+      userFrom: this.id,
+      userTo: post.createdBy,
+      iconFrom: this.randomIconComment,
+      actionTime: new Date(),
+      idPost: post._id
+    }
+    //Registrar Notificacion
+    this.authService.registerNotification(notificacion).subscribe(data =>{
+      if (data['success']){
+        this.flashMessage.show('Notificacion registrada!', {cssClass: 'alert-success', timeout: 3000});
+        this.router.navigate(['/dashboard'])
+      }else{
+        this.flashMessage.show('Algo salió mal', {cssClass: 'alert-danger', timeout: 3000});
+        this.router.navigate(['/dashboard'])
+      }
+    })
   }
 
   reloadPosts() {
@@ -178,7 +219,18 @@ export class ShowPostComponent implements OnInit {
       createdBy: post.createdBy,
       iconBy: this.randomIconComment
     }
+
+    const notificacion = {
+      action: "comentó",
+      userFrom: this.id,
+      userTo: post.createdBy,
+      iconFrom: this.randomIconComment,
+      actionTime: new Date(),
+      idPost: post._id
+    }
+
     console.log("Comentario", comment);
+    console.log("Notificacion", notificacion);
     //  Validar comentario
     if(!this.validateService.validateComment(comment)){
       this.flashMessage.show('Completa todos los campos', {cssClass: 'alert-danger', timeout: 3000});
@@ -190,6 +242,18 @@ export class ShowPostComponent implements OnInit {
       console.log("Entre a la funcion", data.body)
       if (data.body['success']){
         this.flashMessage.show('Comentario registrado!', {cssClass: 'alert-success', timeout: 3000});
+        this.router.navigate(['/dashboard'])
+      }else{
+        this.flashMessage.show('Algo salió mal', {cssClass: 'alert-danger', timeout: 3000});
+        this.router.navigate(['/dashboard'])
+      }
+    })
+
+    //Registrar Notificacion
+    this.authService.registerNotification(notificacion).subscribe(data =>{
+      console.log("Entre a la funcion noti", data)
+      if (data['success']){
+        this.flashMessage.show('Notificacion registrada!', {cssClass: 'alert-success', timeout: 3000});
         this.router.navigate(['/dashboard'])
       }else{
         this.flashMessage.show('Algo salió mal', {cssClass: 'alert-danger', timeout: 3000});
