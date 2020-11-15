@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import {FlashMessagesService} from 'angular2-flash-messages';
 //import { profile } from 'console';
 import {Router} from '@angular/router';
+import { IconService } from 'src/app/services/icon.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +18,7 @@ export class ProfileComponent implements OnInit {
   descripcion:any = {desc:null};
   trabajo2:any = {trabajo:null};
   id:any = {_id:null};
+  icon: any;
 
   editProfile = false;
 
@@ -28,7 +30,12 @@ export class ProfileComponent implements OnInit {
   twt: String;
 
 
-  constructor(private authService: AuthService, private flashMessage: FlashMessagesService, private router: Router) { }
+  constructor(
+    private authService: AuthService, 
+    private flashMessage: FlashMessagesService, 
+    private router: Router,
+    private iconService: IconService
+    ) { }
 
   updateProf(){
     const user = {
@@ -36,7 +43,8 @@ export class ProfileComponent implements OnInit {
       desc: this.descr,
       trabajo: this.work,
       face: this.facebook,
-      twt: this.twt
+      twt: this.twt,
+      icon: this.icon
     }
     
 
@@ -62,6 +70,12 @@ export class ProfileComponent implements OnInit {
     this.editProfile = false; // Show new blog form
   }
 
+  getIcon(){
+    this.iconService.getIcon().subscribe(result => {
+      this.icon = result['sprites']['front_default'];
+    });
+  }
+
   ngOnInit(): void {
     this.authService.authenticatePorfile().subscribe(profile =>{
       this.user = profile.body.user;
@@ -69,7 +83,9 @@ export class ProfileComponent implements OnInit {
       this.descripcion = profile.body.desc;
       this.trabajo2 = profile.body.trabajo;
       this.id = profile.body.user._id;
-      console.log(this.id)
+      console.log(profile.body.user.icon);
+      this.icon = profile.body.user.icon;
+      this.getIcon();
     })
   }
 

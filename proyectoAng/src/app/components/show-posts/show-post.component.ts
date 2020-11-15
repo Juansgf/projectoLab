@@ -48,11 +48,12 @@ export class ShowPostComponent implements OnInit {
   }
 
   deletePost(idPost){
+    console.log("ENTRE AL DELETE");
     this.authService.deletePost(idPost).subscribe(data => {
       console.log("Post deleted with id "+idPost)
       console.log(data)
     })
-    window.location.reload();
+    window.location.reload(); 
   }
 
   getAllPost(){
