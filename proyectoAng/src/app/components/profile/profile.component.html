@@ -1,20 +1,21 @@
 
-<div class="container">
-  <div class="row">
-      <div class="col"></div>
-      <div class="col">
-          <div class="card">
-              <div class="card-body">
-                  <h4 class="card-title">{{user.name}}</h4>
-                  <h6 class="text-muted card-subtitle mb-2">{{user.email}}</h6>
-                  <p class="card-text">{{user.trabajo}}</p>
-                  <p class="card-text">{{user.desc}}</p>
-                  <a class="card-link" id="editarPC" (click)="edProfile()" >Editar Perfil</a></div>
-          </div>
-      </div>
-  </div>
-</div>
 
+  <div class="row">
+    <div class="col-2 d-flex justify-content-center">
+      <img src="{{icon}}" width="200px" height="200px">
+    </div>
+    <div class="col">
+      <br>
+      <br>
+      <h1>{{user.name}}</h1>
+      <h2>{{user.email}}</h2>
+      <p >{{user.trabajo}}</p>
+      <p >{{user.desc}}</p>
+      <a class="card-link" id="editarPC" (click)="edProfile()" >Editar Perfil</a>   
+    </div>
+  </div>
+
+<br>
 <div class="container" *ngIf="editProfile">
     <h1>Editar Perfil</h1>
   	<hr>
@@ -31,7 +32,7 @@
       <!-- edit form column -->
       <div class="col-md-6 personal-info">
 
-        <h3>Información Personal</h3>
+        <h2>Información Personal</h2>
         
         <form (submit)="updateProf()">
           
@@ -64,19 +65,15 @@
           </div>
 
           <div class="form-group">
-            <label class="col-lg-3 control-label">Link TWT:</label>
+            <label class="col-lg-3 control-label">Link Twitter:</label>
             <div class="col-lg-8">
               <input class="form-control" [(ngModel)]="twt" name="twt" type="text" value="">
             </div>
           </div>
 
           <div class="form-group">
-            <label class="col-md-3 control-label"></label>
-            <div class="col-md-8">
               <input type="submit" class="btn btn-primary" id="guardarC" value="Guardar cambios">
-              <span></span>
-              <input [ngStyle]="{float:right}" (click)="edHProfile()" class="btn btn-danger" value="Cancelar">
-            </div>
+              <input (click)="edHProfile()" class="btn btn-danger" id="Cancelar" value="Cancelar">
           </div>
         </form>
       </div>

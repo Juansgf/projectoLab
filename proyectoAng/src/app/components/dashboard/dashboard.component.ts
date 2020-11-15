@@ -81,19 +81,22 @@ export class DashboardComponent implements OnInit {
   }
 
   addPost() {
+    console.log("Entre al addpost")
     this.newPost = true;
     this.processing = true;
 
     this.randomIconPostGenerate();
 
     const fecha = new Date();
+    
+    console.log(this.formatDate(fecha));
 
     const post = {
       title: this.form.get('title').value,
       content: this.form.get('content').value,
       createdBy: this.id,
       iconBy: this.randomIconPost,
-      postTime: fecha,
+      postTime: this.formatDate(fecha),
       roleBy: this.role
     }
 
@@ -142,8 +145,12 @@ export class DashboardComponent implements OnInit {
 
 
 
-   goBack() {
+  goBack() {
     window.location.reload(); // Clear all variable states
+  }
+
+  goBackR() {
+    this.newPost= false; // Clear all variable states
   }
 
   getIcon(){
@@ -152,6 +159,18 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  formatDate(date){
+
+    let month=String(date.getMonth()+1);
+    let day=String(date.getDate());
+    let year= String(date.getFullYear());
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    return `${day}/${month}/${year}`;
+  }
+
 }
+
+
 
 // Disable new blog form

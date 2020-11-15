@@ -139,8 +139,9 @@ export class AuthService {
   deletePost(idPost){
     let headers = new HttpHeaders();
     headers.append('Contet-Type', 'application/json');
-    return this.http.delete('http://localhost:3000/user/deletePost/'+idPost);
     console.log(idPost)
+    return this.http.delete('http://localhost:3000/user/deletePost/'+idPost);
+    
   }
 
   likePost(post){
