@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 // components
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -62,7 +63,7 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatToolbarModule,
     MatExpansionModule,
-
+    ToastrModule.forRoot()
   ],
 
   declarations: [

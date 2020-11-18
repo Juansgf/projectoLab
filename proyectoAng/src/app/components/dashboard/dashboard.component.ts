@@ -7,6 +7,9 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { IconService } from 'src/app/services/icon.service';
 import { ElementRef } from '@angular/core';
 
+import { ToastrService } from 'ngx-toastr';
+import { not } from '@angular/compiler/src/output/output_ast';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -30,6 +33,8 @@ export class DashboardComponent implements OnInit {
   iconName:any = {icon:null}
   randomIconPost:any = {icon:null}
 
+  public notis : any [];
+
   constructor(
     private validateService:ValidateService,
     private flashMessage:FlashMessagesService,
@@ -38,7 +43,8 @@ export class DashboardComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router:Router,
     private elementRef: ElementRef,
-    private iconService: IconService) {
+    private iconService: IconService,
+    private toastr: ToastrService) {
       this.createNewPostForm();
      }
 
@@ -168,8 +174,24 @@ export class DashboardComponent implements OnInit {
     return `${day}/${month}/${year}`;
   }
 
+  getNotis() {
+    var size = 0;
+    this.authService.authenticatePorfile().subscribe(profile =>{
+      this.id = profile.body.user._id
+      this.authService.getNotifications(this.id).subscribe(data => {
+        this.notis = data['notification'];
+        // console.log(this.notis)
+        size = this.notis.length
+        // console.log("El lenght", size)
+        if(size > 0){
+          for(var i = 0; i < size; i++){
+            this.toastr.success(`${this.notis[i].action} a tu publicación`, 'Alguien');
+          }
+        } else {
+          this.toastr.error('No hay notificaciones', 'Lo siento');
+        }
+      });
+    });
+  }
+
 }
-
-
-
-// Disable new blog form
