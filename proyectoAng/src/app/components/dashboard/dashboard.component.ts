@@ -185,7 +185,12 @@ export class DashboardComponent implements OnInit {
         // console.log("El lenght", size)
         if(size > 0){
           for(var i = 0; i < size; i++){
-            this.toastr.success(`${this.notis[i].action} a tu publicación`, 'Alguien');
+            if(this.notis[i].seen){
+              // this.toastr.warning('No hay notificaciones nuevas', 'Lo siento');
+              break;
+            } else {
+              this.toastr.success(`${this.notis[i].action} a tu publicación`, 'Alguien');
+            }
           }
         } else {
           this.toastr.error('No hay notificaciones', 'Lo siento');

@@ -11,8 +11,16 @@ var NotificationSchema = new mongoose.Schema({
   iconFrom: {type:String},
   actionTime: {type:String},
   idPost: {type:String},
-  postTitle: {type:String}
+  postTitle: {type:String},
+  seen: {type: Boolean, default: false}
 });
 
 
 const Notification = module.exports = mongoose.model('Notification', NotificationSchema);
+
+module.exports.updateSeen = function(notification, idUsuario, callback){
+  Notification.updateMany({userTo: idUsuario}, {seen : true}, function(err, res) {
+    if (err) throw err;
+    console.log("documents updated");
+  });
+};

@@ -27,12 +27,13 @@ module.exports.showNotifications = (req, res) => {
   // console.log("El req", req.body._id)
   Notification.find({'userTo': req.body._id}, (err, notificaciones) => {
     if(err){
-        res.json({ success: false, message: err})
+      res.json({ success: false, message: err})
     } else{
         if(!notificaciones){
-            res.json({ success: false, message: "No hay notificaciones"})
+          res.json({ success: false, message: "No hay notificaciones"})
         } else {
-            res.json({ success: true, notification: notificaciones})
+          Notification.updateSeen(notificaciones, req.body._id);
+          res.json({ success: true, notification: notificaciones})
         }
     }
   }).sort({'_id': -1})
