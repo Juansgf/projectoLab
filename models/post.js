@@ -17,7 +17,8 @@ var PostSchema = new mongoose.Schema({
     postId: {type:String},
     comment: {type:String},
     createdBy: {type:String},
-    iconBy: {type:String}
+    iconBy: {type:String},
+    commentTime: {type:String}
   }]
 });
 
@@ -64,7 +65,8 @@ module.exports.addComment = function(post, callback){
   let comment = post.comment;
   let idUser = post.createdBy;
   let iconUser = post.iconBy;
-  Post.updateOne({_id: id}, { $push: { comments: { postId: id, comment: comment, createdBy: idUser, iconBy: iconUser} } }, function(err, res) {
+  let commentT = post.commentTime;
+  Post.updateOne({_id: id}, { $push: { comments: { postId: id, comment: comment, createdBy: idUser, iconBy: iconUser, commentTime: commentT} } }, function(err, res) {
     if (err) throw err;
     console.log("1 document updated comments");
   });

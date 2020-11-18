@@ -98,8 +98,6 @@ export class AuthService {
     this.user = user;
   }
 
-
-
   logout(){
     this.authToken = null;
     this.user = null;
@@ -141,7 +139,7 @@ export class AuthService {
     headers.append('Contet-Type', 'application/json');
     console.log(idPost)
     return this.http.delete('http://localhost:3000/user/deletePost/'+idPost);
-    
+
   }
 
   likePost(post){
@@ -156,6 +154,13 @@ export class AuthService {
       dislikes: post.dislikes};
       console.log(post.dislikes);
       return this.http.post('http://localhost:3000/user/dislikePost/', postData)
+  }
+
+  getNotifications(idUser){
+    const notiData = {
+      _id: idUser
+    };
+    return this.http.post('http://localhost:3000/user/showNotifications/', notiData)
   }
 
   loadToken() {

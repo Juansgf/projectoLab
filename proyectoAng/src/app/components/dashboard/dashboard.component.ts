@@ -88,7 +88,7 @@ export class DashboardComponent implements OnInit {
     this.randomIconPostGenerate();
 
     const fecha = new Date();
-    
+
     console.log(this.formatDate(fecha));
 
     const post = {
@@ -160,7 +160,6 @@ export class DashboardComponent implements OnInit {
   }
 
   formatDate(date){
-
     let month=String(date.getMonth()+1);
     let day=String(date.getDate());
     let year= String(date.getFullYear());

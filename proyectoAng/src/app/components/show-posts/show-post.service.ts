@@ -56,11 +56,7 @@ export class ShowPostService {
       return this.http.post('http://localhost:3000/user/adminPosts',{})
     }
 
-
-
     reloadPosts() {
       this.router.navigate(['/dashboard']);
     }
-
-
 }

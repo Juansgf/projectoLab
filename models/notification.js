@@ -10,14 +10,9 @@ var NotificationSchema = new mongoose.Schema({
   userTo: {type:String, required:true},
   iconFrom: {type:String},
   actionTime: {type:String},
-  idPost: {type:String}
+  idPost: {type:String},
+  postTitle: {type:String}
 });
 
 
 const Notification = module.exports = mongoose.model('Notification', NotificationSchema);
-
-
-module.exports.getById = function(id, callback) {
-  console.log("find by: "+ id);
-  Notification.findById(id, callback);
-}

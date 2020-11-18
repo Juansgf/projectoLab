@@ -89,8 +89,7 @@
       <div *ngIf="showComment">
         <div class="card w-75" *ngFor="let comentario of post.comments" style="margin-left: 25%;">
           <div class="card-header">
-            Comentario de:
-            <img src={{comentario.iconBy}} height="30px" width="30px"/>
+            <p> Comentario de: <img src={{comentario.iconBy}} height="30px" width="30px"/> {{comentario.commentTime}} </p>
           </div>
           <div class="card-body">
             <p>{{comentario.comment}}</p>

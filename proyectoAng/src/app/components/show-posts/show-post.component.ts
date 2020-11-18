@@ -53,7 +53,7 @@ export class ShowPostComponent implements OnInit {
       console.log("Post deleted with id "+idPost)
       console.log(data)
     })
-    window.location.reload(); 
+    window.location.reload();
   }
 
   getAllPost(){
@@ -120,11 +120,13 @@ export class ShowPostComponent implements OnInit {
   }
 
   likePost(post){
+    const fecha = new Date();
+
     this.randomIconPostGenerate(this.id, post._id);
 
     console.log("likes", post);
-      this.authService.likePost(post).subscribe(data => {
-        this.getAllPost();
+    this.authService.likePost(post).subscribe(data => {
+      this.getAllPost();
     });
 
     const notificacion = {
@@ -132,8 +134,9 @@ export class ShowPostComponent implements OnInit {
       userFrom: this.id,
       userTo: post.createdBy,
       iconFrom: this.randomIconComment,
-      actionTime: new Date(),
-      idPost: post._id
+      actionTime: this.formatDate(fecha),
+      idPost: post._id,
+      postTitle: post.title
     }
     //Registrar Notificacion
     this.authService.registerNotification(notificacion).subscribe(data =>{
@@ -148,6 +151,8 @@ export class ShowPostComponent implements OnInit {
   }
 
   dislikePost(post){
+    const fecha = new Date();
+
     this.randomIconPostGenerate(this.id, post._id);
 
     this.authService.dislikePost(post).subscribe(data => {
@@ -159,8 +164,9 @@ export class ShowPostComponent implements OnInit {
       userFrom: this.id,
       userTo: post.createdBy,
       iconFrom: this.randomIconComment,
-      actionTime: new Date(),
-      idPost: post._id
+      actionTime: this.formatDate(fecha),
+      idPost: post._id,
+      postTitle: post.title
     }
     //Registrar Notificacion
     this.authService.registerNotification(notificacion).subscribe(data =>{
@@ -212,13 +218,15 @@ export class ShowPostComponent implements OnInit {
   }
 
   addComment(post){
+    const fecha = new Date();
 
     this.randomIconPostGenerate(this.id, post._id);
     const comment = {
       postId: post._id,
       comment: this.form.get('comment').value,
       createdBy: post.createdBy,
-      iconBy: this.randomIconComment
+      iconBy: this.randomIconComment,
+      commentTime: this.formatDate(fecha)
     }
 
     const notificacion = {
@@ -226,8 +234,9 @@ export class ShowPostComponent implements OnInit {
       userFrom: this.id,
       userTo: post.createdBy,
       iconFrom: this.randomIconComment,
-      actionTime: new Date(),
-      idPost: post._id
+      actionTime: this.formatDate(fecha),
+      idPost: post._id,
+      postTitle: post.title
     }
 
     console.log("Comentario", comment);
@@ -283,6 +292,15 @@ export class ShowPostComponent implements OnInit {
 
   reloadPage(){
     window.location.reload();
+  }
+
+  formatDate(date){
+    let month=String(date.getMonth()+1);
+    let day=String(date.getDate());
+    let year= String(date.getFullYear());
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    return `${day}/${month}/${year}`;
   }
 
 }

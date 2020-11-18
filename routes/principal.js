@@ -33,6 +33,8 @@ router.post('/dislikePost', PostController.registerDislikes);
 //addComments
 router.put('/addComment', PostController.addCommentPost);
 
+//get notifications
+router.post('/showNotifications', NotificationController.showNotifications);
 // Authenticate
 router.post('/authenticate', UserController.auth);
 

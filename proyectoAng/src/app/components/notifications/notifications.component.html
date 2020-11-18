@@ -1,0 +1,5 @@
+<div class="alert alert-success" *ngFor="let noti of notis">
+  <p class="alert-heading"><img src={{noti.iconFrom}} height="50px" width="50px"/> {{noti.actionTime}}</p>
+  <p>{{noti.action}} a tu publicación "{{noti.postTitle}}"</p>
+  <hr>
+</div>

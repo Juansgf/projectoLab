@@ -17,16 +17,23 @@ module.exports.registerNotification = (req, res, next) => {
 
 };
 
-// module.exports.showAllPosts = (req, res) => {
-//   Post.find({}, (err, posts) => {
-//     if(err){
-//         res.json({ success: false, message: err})
-//     } else{
-//         if(!posts){
-//             res.json({ success: false, message: "No hay posts"})
-//         } else {
-//             res.json({ success: true, post: posts})
-//         }
-//     }
-//   }).sort({'_id': -1})
+// module.exports.showNotifications = async (req, res) => {
+//   console.log("El req", req.params)
+//   await Notification.getById(req.params.id);
+//   res.json("Notifications");
 // };
+
+module.exports.showNotifications = (req, res) => {
+  // console.log("El req", req.body._id)
+  Notification.find({'userTo': req.body._id}, (err, notificaciones) => {
+    if(err){
+        res.json({ success: false, message: err})
+    } else{
+        if(!notificaciones){
+            res.json({ success: false, message: "No hay notificaciones"})
+        } else {
+            res.json({ success: true, notification: notificaciones})
+        }
+    }
+  }).sort({'_id': -1})
+};
