@@ -33,6 +33,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { AdminGuard } from './guards/admin.guard';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { AdministratorsComponent } from './components/administrators/administrators.component';
 
 
 
@@ -45,7 +46,8 @@ const appRoutes: Routes = [
 {path:'profile', component:ProfileComponent,canActivate:[AdminGuard]},
 {path:'home', component:HomeComponent},
 {path:'edit-post/:post_id', component:EditPostComponent},
-{path:'notifications', component:NotificationsComponent}
+{path:'notifications', component:NotificationsComponent},
+{path:'administrators', component:AdministratorsComponent}
 ];
 
 @NgModule({
@@ -77,7 +79,8 @@ const appRoutes: Routes = [
     ShowPostComponent,
     ProfileComponent,
     EditPostComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    AdministratorsComponent
   ],
 
   providers: [ValidateService, AuthService, AuthGuard,{provide: JWT_OPTIONS, useValue: JWT_OPTIONS },

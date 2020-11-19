@@ -17,6 +17,7 @@ export class NotificationsComponent implements OnInit {
 
   id:any;
   public notis : any [];
+  noHayNotis = true;
 
   constructor(
     private http: HttpClient,
@@ -33,10 +34,18 @@ export class NotificationsComponent implements OnInit {
   }
 
   getAllNotifications(){
+    var varsize = 0;
     this.authService.authenticatePorfile().subscribe(profile =>{
       this.id = profile.body.user._id
       this.authService.getNotifications(this.id).subscribe(data => {
         this.notis = data['notification'];
+        varsize = this.notis.length;
+        if(varsize > 0){
+            console.log(varsize);
+            this.noHayNotis = false;
+            console.log("ADENTRO",this.noHayNotis);
+        }
+        console.log("AFUERA",this.noHayNotis)
       });
 
     });

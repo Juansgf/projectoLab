@@ -19,6 +19,10 @@ export class IconService{
     return this.http.get(this.apiUrl.icon, {});
   }
 
+  getIconUrl(url){
+    return this.http.get(url, {});
+  }
+
   getIconPosts(urlIconPost){
     console.log("posts recibidos", urlIconPost)
     // for(var i = 0; i < post.length; i++){

@@ -3,6 +3,7 @@ import {ValidateService} from '../../services/validate.service'
 import {AuthService} from '../../services/auth.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {Router} from '@angular/router';
+import { IconService } from 'src/app/services/icon.service';
 
 @Component({
   selector: 'app-register',
@@ -19,23 +20,27 @@ export class RegisterComponent implements OnInit {
     }
 
     idIcon = this.random(1, 800);
-    icon:String = `https://pokeapi.co/api/v2/pokemon/${this.idIcon}`
+    iconS:String = `https://pokeapi.co/api/v2/pokemon/${this.idIcon}`
+    
 
   constructor(private validateService: ValidateService,
     private flashMessage:FlashMessagesService,
     private authService: AuthService,
-    private router:Router ) { }
+    private router:Router,
+    private iconService: IconService) { }
 
   ngOnInit(): void {
   }
 
   onRegisterSubmit(){
+
     const user = {
       name: this.name,
       email: this.email,
       password: this.password,
-      icon: this.icon
+      icon: this.iconS
     }
+    
 
      // Required Fields
      if(!this.validateService.validateRegister(user)){
@@ -62,6 +67,12 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/login'])
       }
     })
+  }
+
+  getIcon(){
+    this.iconService.getIconUrl(this.iconS).subscribe(result => {
+      this.iconS = result['sprites']['front_default'];
+    });
   }
 
 }

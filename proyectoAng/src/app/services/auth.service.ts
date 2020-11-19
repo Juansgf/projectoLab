@@ -191,4 +191,8 @@ export class AuthService {
     return this.http.post('http://localhost:3000/user/addNotification/', notification)
   }
 
+  getAdmins(){
+    return this.http.get('http://localhost:3000/user/getAdmins/')
+  }
+
 }

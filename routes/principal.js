@@ -8,6 +8,7 @@ const Notification = require('../models/notification');
 const PostController = require('../controllers/postController');
 const UserController = require('../controllers/userController'); 
 const NotificationController = require('../controllers/notificationController');
+const AdminController = require('../controllers/adminController');
 const config = require('../config/db')
 
 // Register
@@ -47,5 +48,8 @@ router.get('/userPost/:id', UserController.getPost);
 
 //Notificaciones
 router.post('/addNotification', NotificationController.registerNotification);
+
+//Administradores
+router.get('/getAdmins', AdminController.getAdmins);
 
 module.exports = router; 
