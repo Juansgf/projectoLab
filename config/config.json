@@ -1,7 +1,7 @@
 {
     "development": {
         "PORT": 3000,
-        "MONGODB_URI": "mongodb://localhost:27017/proyectoLab"
+        "MONGODB URI": "mongodb+srv://dbAdmin:admin@cluster0.g7dwt.mongodb.net/<dbname>?retryWrites=true&w=majority"
     },
     "production": {
         "PORT": 80,
