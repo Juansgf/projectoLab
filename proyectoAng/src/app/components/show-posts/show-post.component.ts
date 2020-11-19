@@ -27,8 +27,8 @@ export class ShowPostComponent implements OnInit {
 
   user_id : String
 
-  newComment = false;
-  showComment = false;
+  newComment = [false, this.id];
+  showComment = [false, this.id];
 
   constructor(
     private showPostService: ShowPostService,
@@ -272,22 +272,37 @@ export class ShowPostComponent implements OnInit {
     })
   }
 
-  newCommentForm(){
-    this.newComment = true;
-    this.showComment = false;
+  newCommentForm(id){
+    this.newComment[0] = true;
+    this.showComment[0] = false;
+    this.newComment[1] = id;
   }
 
-  showComments(){
-    this.newComment = false;
-    this.showComment = true;
+  showComments(id){
+    console.log("ID DEL POST", this.id);
+    console.log(id);
+    this.showComment[1] = id;
+    if(this.showComment[1] != id){
+      this.showComment[0] = false;
+    }else{
+      this.showComment[0] = true;
+    }
+    this.newComment[0] = false;   
+    this.newComment[1] = id;
+    console.log("ID ORIGINAL", this.id);
+    this.id = id;
+    
   }
 
-  cancelShowComments() {
-    this.showComment = false;
+  cancelShowComments(id) {
+    this.showComment[0] = false;
+    this.showComment[1] = id;
+    this.id = id;
   }
 
   cancelCommentForm() {
-    this.newComment = false;
+    this.newComment[0] = false;
+    this.showComment[0] = false;
   }
 
   reloadPage(){
