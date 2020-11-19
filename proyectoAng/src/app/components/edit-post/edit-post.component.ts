@@ -52,8 +52,6 @@ export class EditPostComponent implements OnInit {
    // (+) converts string 'id' to a number         
     // In a real app: dispatch action to load the details here.     });
     })
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#C9C9C9';
-  
   }
 
 }
