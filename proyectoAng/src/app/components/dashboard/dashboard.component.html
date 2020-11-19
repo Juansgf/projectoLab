@@ -1,4 +1,4 @@
-<div class="container mb-4">
+<div class="container mb-4 ">
  <h1 style="margin-top: 3rem;">Bienvenido {{user.name}} <img src={{icon}} width="70px" height="70px"> </h1>
   <button type="button" id="postC" name="button" class="btn btn-info btn-lg" *ngIf="!newPost" (click)="newPostForm()" style="margin: 5px;">Nueva publicación</button>
   <button [disabled]="loadingPosts" type="Button" name="reload" class="btn btn-secondary btn-lg" *ngIf="!newPost" (click)="goBack()" style="margin: 5px;">
