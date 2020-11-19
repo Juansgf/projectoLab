@@ -8,6 +8,17 @@
     padding-bottom: 20px;
   }
   
+  #buttonCan{
+    background-color: rgb(39, 161, 182);
+    border-color: rgb(39, 161, 182);
+    
+}
+
+#buttonGuardar{
+  background-color:rgba(0, 77, 177, 0.788);
+    border-color: rgba(0, 77, 177, 0.788);
+}
+  
   .col.editPlace {
     /*display: inline-grid;*/
     /*height: 24%;*/
@@ -17,7 +28,7 @@
   .inputStyle {
     width: 60%;
     border: none;
-    border-bottom: 2px solid #0069d9;
+    border-bottom: 2px solid rgba(9, 46, 71, 0.788);
   }
   
   .btn:not(:disabled):not(.disabled) {
@@ -28,7 +39,8 @@
     width: 100%;
     padding: 23px;
     border: none;
-    border-bottom: 2px solid #0069d9;
+    border-bottom: 2px solid rgba(9, 46, 71, 0.788);
+   
   }
   
  
@@ -39,15 +51,17 @@
   }
   
   .titleSt {
-    color: #0069d9;
+    color:rgba(9, 46, 71, 0.788);
     font-weight: bolder;
   }
   
   .contenSt {
     padding-top: 28px;
-    color: #0069d9;
+    color:rgba(9, 46, 71, 0.788);
     font-weight: bolder;
   }
+
+
   
   .row.btnsRow {
     text-align: center;

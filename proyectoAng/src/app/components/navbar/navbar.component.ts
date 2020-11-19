@@ -23,15 +23,18 @@ export class NavbarComponent implements OnInit {
       console.log(this.role)
 
       if (this.role == "ADMIN"){
-          this.showP = true;
-      }
+        this.showP = true;
+    }
     });
+    
+    
   }
 
   onLogoutClick(){
     this.auth.logout();
     this.FlashMessages.show('Sesión cerrada exitosamente', {cssClass:'alert-success', timeout:3000});
     this.router.navigate(['/home']);
+    
   }
 
 }
