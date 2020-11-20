@@ -44,6 +44,7 @@ export class NotificationsComponent implements OnInit {
             console.log(varsize);
             this.noHayNotis = false;
             console.log("ADENTRO",this.noHayNotis);
+            this.noHayNotis = false;
         }
         console.log("AFUERA",this.noHayNotis)
       });
